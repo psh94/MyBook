@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class CartInterceptor implements HandlerInterceptor {
 
+
     //클라이언트가 로그인을 하였는지 확인하는 interceptor
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

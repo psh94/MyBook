@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class AdminInterceptor implements HandlerInterceptor {
 
+
 	// 사용자가 admin 계정인지 확인하는 interceptor
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

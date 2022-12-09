@@ -4,11 +4,13 @@
 - 백엔드에 집중하기 위해 프론트엔드는 진행하지 않았습니다.
 
 ## 사용 기술
-- SpringBoot 2.7.6
+- Spring Boot 2.7.6
 - JAVA 11
 - MyBatis 2.3.0
-- MySQL 8.0.30
-- Lombok
-- Validation
+- MySQL
 - Quartz
 - Spring Security
+- IntelliJ
+## ERD
+
+![erd](https://user-images.githubusercontent.com/84213252/206617765-892bf8f7-4c90-4a82-8f53-22308c44d3f6.PNG)

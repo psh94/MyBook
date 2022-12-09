@@ -24,7 +24,7 @@ public class Book {
 
     private int quantity;
 
-    private int discount;
+    private double discount;
 
     private Date regDate;
 

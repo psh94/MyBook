@@ -28,7 +28,7 @@ public class BookInfo {
     private int price;
 
     @NotNull
-    private int discount;
+    private double discount;
 
     private List<AttachImage> imageList;
 

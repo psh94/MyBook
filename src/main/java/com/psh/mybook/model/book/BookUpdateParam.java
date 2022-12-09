@@ -26,7 +26,7 @@ public class BookUpdateParam {
 
     private int quantity;
 
-    private int discount;
+    private double discount;
 
     private Date regDate;
 

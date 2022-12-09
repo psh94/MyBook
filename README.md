@@ -12,8 +12,8 @@
 - Spring Security
 - IntelliJ
 ## ERD
+![erd](https://user-images.githubusercontent.com/84213252/206620803-45c5a9ab-c5a0-47b7-af8a-b5f229cbf6df.PNG)
 
-![erd](https://user-images.githubusercontent.com/84213252/206617765-892bf8f7-4c90-4a82-8f53-22308c44d3f6.PNG)
 
 ## Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case

@@ -8,11 +8,9 @@
 - JAVA 11
 - MyBatis 2.3.0
 - MySQL
-- Lombok
-- Validation
 - Quartz
 - Spring Security
-
+- IntelliJ
 ## ERD
 
 ![erd](https://user-images.githubusercontent.com/84213252/206617765-892bf8f7-4c90-4a82-8f53-22308c44d3f6.PNG)

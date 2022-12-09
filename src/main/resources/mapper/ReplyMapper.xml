@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.psh.mybook.mapper.ReplyMapper">
+
+	<!-- 댓글등록 -->
+  	<insert id="enrollReply">
+
+  		insert into reply(bookId, memberId, content, rating) values (#{bookId}, #{memberId}, #{content}, #{rating})
+
+  	</insert>
+
+	<select id="checkReply" resultType="integer">
+
+		select replyId from reply
+		where memberId = #{memberId} and bookId = #{bookId}
+
+	</select>
+
+	<!-- 댓글 페이징 -->
+	<select id="getReplyList" resultType="com.psh.mybook.model.reply.Reply">
+
+		select replyId, bookId, memberId, content, rating, regDate
+		from reply
+		where bookId = #{bookId}
+		order by regDate desc limit #{skip}, #{amount}
+
+	</select>
+
+	<select id="getReplyTotal" resultType="int">
+
+		select count(*)
+		from reply
+		where bookId = #{bookId}
+
+	</select>
+
+	<!-- 댓글수정 -->
+	<update id="updateReply">
+
+		update reply set content = #{content}, rating = #{rating}
+		where replyId = #{replyId}
+
+	</update>
+
+	<select id="getUpdateReply" resultType="com.psh.mybook.model.reply.Reply">
+
+		select * from reply
+		where replyId = #{replyId}
+
+	</select>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+
+		DELETE FROM reply
+		WHERE replyId = #{replyId}
+
+	</delete>
+
+
+
+
+</mapper>

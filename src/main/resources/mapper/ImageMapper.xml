@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.psh.mybook.mapper.ImageMapper">
+
+	<insert id="imageEnroll">
+		insert into image(bookId, fileName, uploadPath, uuid) values (#{bookId}, #{fileName}, #{uploadPath}, #{uuid})
+	</insert>
+
+	<select id="getAttachList" resultType="com.psh.mybook.model.book.AttachImage">
+		select * from image where bookId = #{bookId}
+	</select>
+
+	<delete id="deleteImageAll">
+
+		delete FROM image where bookId = #{bookId}
+
+	</delete>
+
+	<select id="checkFileList" resultType="com.psh.mybook.model.book.AttachImage">
+
+		select * from image where uploadpath = DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 DAY), '%Y\%m\%d')
+
+	</select>
+
+	<select id="getAttachInfo" resultType="com.psh.mybook.model.book.AttachImage">
+
+		select * from image where bookId = #{bookId}
+
+	</select>
+
+
+
+  </mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.psh.mybook.mapper.BookMapper">
+  
+	<!-- 책 등록 -->
+  	<insert id="bookEnroll">
+
+		<!-- insert 문이 실행된 후에 selectKey 실행
+		쿼리문의 결과값이 Book의 bookId에 int 타입으로 반환된다.
+		 마지막으로 insert 된 id를 반환.-->
+		<selectKey resultType="int" keyProperty="bookId" order="AFTER">
+
+			SELECT LAST_INSERT_ID()
+
+		</selectKey>
+
+		insert into book(bookname, author, isbn, price, discount, quantity)
+  		values(#{bookName}, #{author}, #{isbn}, #{price}, #{discount}, #{quantity})
+  	</insert>
+
+	<!-- 책 등록 중복검사 -->
+	<select id="isExistBookIsbn" parameterType="com.psh.mybook.model.book.BookEnrollParam" resultType="boolean">
+		select EXISTS
+		(select isbn from book where isbn = #{isbn})
+	</select>
+
+	<!-- 책 정보 조회	-->
+	<select id="bookGet" resultType="com.psh.mybook.model.book.BookInfo">
+		select bookName, author, isbn, price, discount from book where bookId = #{bookId}
+	</select>
+	<!-- 책 정보 업데이트	-->
+	<update id="bookUpdate">
+		update book set bookName = #{bookName}, author = #{author}, price=#{price}, quantity = #{quantity}, discount=#{discount} where bookId = #{bookId}
+	</update>
+
+	<!-- 책 등록 삭제	-->
+	<delete id="bookDelete">
+		delete from book where isbn = #{isbn}
+	</delete>
+
+	<select id="getBookNameById" resultType="com.psh.mybook.model.book.Book">
+
+		select bookId, bookName from book
+		where bookId = #{bookId}
+
+
+	</select>
+  	
+  </mapper>

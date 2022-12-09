@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.psh.mybook.mapper.OrderMapper">
+
+	<!-- 주문 상품 정보 -->
+	<select id="getBooksInfo" resultType="com.psh.mybook.model.order.OrderPageItem">
+
+		select bookId, bookName, price, discount
+		from book where bookId = #{bookId}
+
+	</select>
+
+	<select id="getOrderInfo" resultType="com.psh.mybook.model.order.OrderItem">
+
+		select bookId, price, discount
+		from book where bookId = #{bookId}
+
+	</select>
+
+	<!-- 주문 테이블 등록 -->
+	<insert id="enrollOrder">
+
+		insert into member_order(orderId, takerName, memberId, address, orderState, deliveryCost, usePoint)
+		values(#{orderId},#{takerName}, #{memberId}, #{address}, '배송준비', #{deliveryCost}, #{usePoint})
+
+	</insert>
+
+	<!-- 주문 아이템 테이블 등록 -->
+	<insert id="enrollOrderItem">
+
+		insert into orderItem(orderId, bookId, bookCount, bookPrice, bookDiscount, savePoint)
+		values(#{orderId}, #{bookId}, #{bookCount}, #{bookPrice}, #{bookDiscount}, #{savePoint})
+
+	</insert>
+
+	<!-- 주문 금액 차감 -->
+	<update id="reduceMoney">
+
+		update member set money = #{money}, point = #{point} where memberid = #{memberId}
+
+	</update>
+
+	<!-- 주문 재고 차감 -->
+	<update id="reduceStock">
+
+		update book set quantity = #{quantity} where bookId = #{bookId}
+
+	</update>
+
+	<delete id="deleteOrderCart">
+
+		delete from cart where memberId = #{memberId} and bookId = #{bookId}
+
+	</delete>
+
+	<!-- 주문 리스트 -->
+	<select id="getOrderList" resultType="com.psh.mybook.model.order.Order">
+
+		select orderId, memberId, orderstate, orderdate
+		from member_order
+		<if test="keyword != null">
+			where memberId like concat('%',#{keyword}, '%')
+		</if>
+		order by orderdate desc
+		limit #{skip}, #{amount}
+
+	</select>
+
+	<!-- 상품 총 개수 -->
+	<select id="getOrderTotal" resultType="int">
+
+		select count(*) from member_order
+
+		<if test="keyword != null">
+			where memberId like concat('%',#{keyword}, '%')
+		</if>
+
+	</select>
+
+	<!-- 주문취소 -->
+	<update id="orderCancle">
+		update member_order set orderState = '주문취소' where orderId = #{orderId}
+	</update>
+
+	<!-- 주문 상품 정보(주문취소) -->
+	<select id="getOrderItemInfo" resultType="com.psh.mybook.model.order.OrderItem">
+
+		select * from orderItem
+		where orderId = #{orderId}
+
+	</select>
+
+	<!-- 주문 정보(주문 취소) -->
+	<select id="getOrder" resultType="com.psh.mybook.model.order.Order">
+
+		select * from member_order
+		where orderId = #{orderId}
+
+	</select>
+
+  </mapper>

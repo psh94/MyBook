@@ -7,6 +7,7 @@ import com.psh.mybook.model.member.Member;
 import com.psh.mybook.model.member.MemberJoinParam;
 import com.psh.mybook.model.member.MemberUpdateParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,9 +19,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void memberJoin(MemberJoinParam param) {
 
-//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//		String encryptedPassword = passwordEncoder.encode(param.getPassword());
-//		param.setPassword(encryptedPassword);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encryptedPassword = passwordEncoder.encode(param.getPassword());
+		param.setPassword(encryptedPassword);
 
 		memberMapper.memberJoin(param);
 	}

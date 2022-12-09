@@ -9,7 +9,7 @@
 - MyBatis 2.3.0
 - MySQL
 - Quartz
-- Spring Security
+- Spring Security(Crypto)
 - IntelliJ
 - Postman
 ## ERD

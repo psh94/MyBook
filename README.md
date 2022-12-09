@@ -7,7 +7,7 @@
 - SpringBoot 2.7.6
 - JAVA 11
 - MyBatis 2.3.0
-- MySQL 8.0.30
+- MySQL
 - Lombok
 - Validation
 - Quartz

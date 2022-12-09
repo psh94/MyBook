@@ -31,20 +31,20 @@ public class MemberController {
 
 	//회원가입
 	@PostMapping("/join")
-	public ResponseEntity<Void> join(@Valid @ModelAttribute MemberJoinParam param, BindingResult bindingResult) throws Exception{
+	public String join(@Valid @ModelAttribute MemberJoinParam param, BindingResult bindingResult) throws Exception{
 
 		if(bindingResult.hasErrors()){
-			return RESPONSE_BAD_REQUEST;
+			throw new IllegalArgumentException();
 		}
 
 		try {
 
 			memberService.memberJoin(param);
-			return RESPONSE_OK;
+			return "joinMemberForm";
 
 		} catch (Exception e){
 
-			return RESPONSE_CONFLICT;
+			throw new IllegalArgumentException();
 
 		}
 	}

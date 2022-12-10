@@ -1,6 +1,7 @@
 package com.psh.mybook.interceptor;
 
 import com.psh.mybook.model.member.Member;
+import com.psh.mybook.utill.SessionConst;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ public class AdminInterceptor implements HandlerInterceptor {
 
 		HttpSession session = request.getSession();
 
-		Member loginedMember = (Member)session.getAttribute("member");
+		Member loginedMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
 
 		if(loginedMember == null || loginedMember.getAdminCk() == 0) {	// 관리자 계정 아닌 경우
 

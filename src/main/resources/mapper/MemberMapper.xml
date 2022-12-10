@@ -27,7 +27,7 @@
 	</update>
 	<!-- 회원 삭제 -->
 	<delete id="memberDelete" parameterType="com.psh.mybook.model.member.Member">
-		delete from member where memberId = #{memberId} and password = #{password}
+		delete from member where memberId = #{memberId}
 	</delete>
 
 	<!-- 회원 정보 -->

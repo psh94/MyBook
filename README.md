@@ -9,8 +9,9 @@
 - MyBatis 2.3.0
 - MySQL
 - Quartz
-- Spring Security
+- Spring Security(Crypto)
 - IntelliJ
+- Postman
 ## ERD
 ![erd](https://user-images.githubusercontent.com/84213252/206620803-45c5a9ab-c5a0-47b7-af8a-b5f229cbf6df.PNG)
 

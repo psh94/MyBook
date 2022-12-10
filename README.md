@@ -13,7 +13,7 @@
 - IntelliJ
 - Postman
 ## ERD
-![erd](https://user-images.githubusercontent.com/84213252/206620803-45c5a9ab-c5a0-47b7-af8a-b5f229cbf6df.PNG)
+![erd](https://user-images.githubusercontent.com/84213252/206838089-aa367fc7-4124-42fb-a937-82575c940064.PNG)
 
 
 ## Use Case

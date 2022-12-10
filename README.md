@@ -17,10 +17,12 @@
 https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr/Q8nwO
 
 
+## Use Case
+https://github.com/psh94/MyBook/wiki/Use-Case
+
 
 ## ERD
 ![erd](https://user-images.githubusercontent.com/84213252/206838089-aa367fc7-4124-42fb-a937-82575c940064.PNG)
 
 
-## Use Case
-https://github.com/psh94/MyBook/wiki/Use-Case
+## 비즈니스 로직

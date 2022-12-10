@@ -1,5 +1,6 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.annotation.Login;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.model.member.MemberJoinParam;
 import com.psh.mybook.model.member.MemberLoginParam;
@@ -10,6 +11,7 @@ import com.psh.mybook.utill.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,14 +67,14 @@ public class MemberController {
 
 
 	@GetMapping("/{memberId}")
-	public ResponseEntity<Void> getMember(@PathVariable String memberId){
+	public ResponseEntity<Void> getMember(@Login @PathVariable String memberId){
 		memberService.getMemberInfo(memberId);
 		return RESPONSE_OK;
 	}
 
 
 
-	@PostMapping("/{memberId}/update")
+	@PostMapping("/update")
 	public ResponseEntity<Void> memberUpdate(@Valid @ModelAttribute MemberUpdateParam param, BindingResult bindingResult){
 
 		if(bindingResult.hasErrors()){
@@ -101,7 +103,12 @@ public class MemberController {
 	@PostMapping("/login")
 	public ResponseEntity<Void> loginPOST(@Valid @ModelAttribute MemberLoginParam param, BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 		Member loginMember = loginService.memberLogin(param);
+
+		HttpSession session = request.getSession();
+
 
 		//--------로그인 실패 시----------
 		//바인딩 에러
@@ -109,16 +116,22 @@ public class MemberController {
 			return RESPONSE_BAD_REQUEST;
 		}
 
-		//loginMember를 찾을 수 없을 때
-		if (loginMember == null) {
-			bindingResult.reject("loginFail", "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.");
-			return RESPONSE_CONFLICT;
-		}
 
-		//--------로그인 성공 시--------
-		HttpSession session = request.getSession();
-		session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-		return RESPONSE_OK;
+		//--------암호화 된 비밀번호 해석--------
+		if (passwordEncoder.matches(param.getPassword(), loginMember.getPassword())) {
+
+			//loginMember를 찾을 수 없을 때
+			if (loginMember == null) {
+				bindingResult.reject("loginFail", "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.");
+				return RESPONSE_CONFLICT;
+			}
+
+			//--------- 로그인 성공 시,--------------
+			session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+			return RESPONSE_OK;
+		}
+		return RESPONSE_CONFLICT;
+
 
 	}
 

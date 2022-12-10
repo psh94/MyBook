@@ -18,7 +18,7 @@
 
   	<!-- 로그인 -->
   	<select id="memberLogin" resultType="com.psh.mybook.model.member.Member">
-  		select memberId, password, name, adminck, money, point from member where memberId = #{memberId} and password = #{password}
+  		select memberId, password, name, adminck, money, point from member where memberId = #{memberId}
   	</select>
 
 	<!-- 회원 정보 업데이트 -->

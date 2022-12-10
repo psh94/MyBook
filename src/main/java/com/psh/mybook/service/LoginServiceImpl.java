@@ -7,14 +7,11 @@ import com.psh.mybook.model.member.MemberLoginParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
-
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
     private final MemberMapper memberMapper;
-    private final HttpSession session;
 
     @Override
     public Member memberLogin(MemberLoginParam param) {

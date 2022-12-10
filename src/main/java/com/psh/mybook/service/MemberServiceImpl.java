@@ -33,6 +33,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public Member getMemberInfo(String memberId) {
+		return memberMapper.getMemberInfo(memberId);
+	}
+
+	@Override
 	public void memberUpdate(MemberUpdateParam param) {
 		memberMapper.memberUpdate(param);
 	}
@@ -47,8 +52,5 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.memberDelete(member);
 	}
 
-	@Override
-	public Member getMemberInfo(String memberId) {
-		return memberMapper.getMemberInfo(memberId);
-	}
+
 }

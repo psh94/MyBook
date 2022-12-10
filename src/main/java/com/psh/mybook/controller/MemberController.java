@@ -31,20 +31,20 @@ public class MemberController {
 
 	//회원가입
 	@PostMapping("/join")
-	public String join(@Valid @ModelAttribute MemberJoinParam param, BindingResult bindingResult) throws Exception{
+	public ResponseEntity<Void> join(@Valid @ModelAttribute MemberJoinParam param, BindingResult bindingResult) throws Exception{
 
 		if(bindingResult.hasErrors()){
-			throw new IllegalArgumentException();
+			return RESPONSE_BAD_REQUEST;
 		}
 
 		try {
 
 			memberService.memberJoin(param);
-			return "joinMemberForm";
+			return RESPONSE_OK;
 
 		} catch (Exception e){
 
-			throw new IllegalArgumentException();
+			return RESPONSE_CONFLICT;
 
 		}
 	}
@@ -96,7 +96,7 @@ public class MemberController {
 		//loginMember를 찾을 수 없을 때
 		if (loginMember == null) {
 			bindingResult.reject("loginFail", "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.");
-			return RESPONSE_BAD_REQUEST;
+			return RESPONSE_CONFLICT;
 		}
 
 		//--------로그인 성공 시--------

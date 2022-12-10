@@ -114,6 +114,7 @@ class MemberServiceTests{
 
 
     @Test
+    @DisplayName("책 등록 삭제")
     public void DeleteMemberTest(){
 
         memberService.memberDelete(member);

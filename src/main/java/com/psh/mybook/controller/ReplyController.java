@@ -56,13 +56,6 @@ public class ReplyController {
         return replyService.replyList(cri);
     }
 
-    /* 댓글 수정 */
-    @PostMapping("/update")
-    public ResponseEntity<Void> replyModifyPOST(Reply reply) {
-        replyService.updateReply(reply);
-        return RESPONSE_OK;
-    }
-
     /* 리뷰 수정 창 */
     @GetMapping("/update")
     public ResponseEntity<Void> replyModifyGET(Reply reply, Model model) {
@@ -71,6 +64,13 @@ public class ReplyController {
         model.addAttribute("replyInfo", replyService.getUpdateReply(reply.getReplyId()));
         model.addAttribute("memberId", reply.getMemberId());
 
+        return RESPONSE_OK;
+    }
+
+    /* 댓글 수정 */
+    @PostMapping("/update")
+    public ResponseEntity<Void> replyModifyPOST(Reply reply) {
+        replyService.updateReply(reply);
         return RESPONSE_OK;
     }
 

@@ -1,5 +1,6 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.annotation.Login;
 import com.psh.mybook.model.cart.Cart;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.service.CartService;
@@ -21,7 +22,7 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/add")
-    public int addCartPOST(Cart cart, HttpServletRequest request) {
+    public int addCartPOST(@Login Cart cart, HttpServletRequest request) {
 
         // 로그인 체크
         HttpSession session = request.getSession();
@@ -38,7 +39,7 @@ public class CartController {
 
 
     @GetMapping("/{memberId}")
-    public ResponseEntity<Void> cartPage(@PathVariable("memberId") String memberId, Model model) {
+    public ResponseEntity<Void> cartPage(@PathVariable String memberId, Model model) {
 
         model.addAttribute("cartInfo", cartService.getCartList(memberId));
         return RESPONSE_OK;

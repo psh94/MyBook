@@ -30,7 +30,7 @@ public class BookController {
     private final ImageService imageService;
 
 
-    @PostMapping("/admin/enroll")
+    @PostMapping("/enroll")
     public ResponseEntity<Void> bookEnroll(@Valid @ModelAttribute BookEnrollParam bookEnrollParam, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -56,7 +56,7 @@ public class BookController {
 
 
 
-    @PostMapping("/admin/update")
+    @PostMapping("/update")
     public ResponseEntity<Void> bookUpdate(@Valid @ModelAttribute BookUpdateParam param){
         boolean existedBook = bookService.isExistBookIsbn(param.getIsbn());
 
@@ -77,7 +77,7 @@ public class BookController {
     // image 테이블은 book 테이블의 bookId를 외래키로 받기 때문에 book 테이블의 데이터가 사라지면 에러가 발생한다.
     // 그렇기 때문에 bookId를 갖고 있는 book의 데이터를 지우기에 앞서 image의 데이터를 먼저 지워야 한다.
 
-    @PostMapping("/admin/delete")
+    @PostMapping("/delete")
     public ResponseEntity<Void> bookDelete(@Valid Book book){
 
         //이미지 정보를 먼저 지워준다.

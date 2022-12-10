@@ -49,11 +49,27 @@ public class MemberController {
 		}
 	}
 
+	@PostMapping("/memberIdChk")
+	@ResponseBody
+	public ResponseEntity<Void> memberChkId(String memberId){
+
+		boolean existMemberId = memberService.isExistMemberId(memberId);
+
+		if (existMemberId){
+			return RESPONSE_BAD_REQUEST;
+		}
+
+		return RESPONSE_OK;
+
+	}
+
+
 	@GetMapping("/{memberId}")
 	public ResponseEntity<Void> getMember(@PathVariable String memberId){
 		memberService.getMemberInfo(memberId);
 		return RESPONSE_OK;
 	}
+
 
 
 	@PostMapping("/{memberId}/update")

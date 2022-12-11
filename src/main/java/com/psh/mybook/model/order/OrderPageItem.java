@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -13,8 +14,10 @@ import java.util.List;
 public class OrderPageItem { // 상품을 담을 클래스
 
     /* View에서 오는 값*/
+    @NotNull
     private int bookId;
 
+    @NotNull
     private int bookCount;
 
     /* DB에서 오는 값 */
@@ -24,7 +27,7 @@ public class OrderPageItem { // 상품을 담을 클래스
 
     private double bookDiscount;
 
-    /* 직접 만들어 낼 값 */
+    /* initSaleTotal()로 직접 만들어 낼 값 */
     private int salePrice;
 
     private int totalPrice;

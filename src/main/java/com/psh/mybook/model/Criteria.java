@@ -17,18 +17,9 @@ public class Criteria {
 
     /* 페이지 skip */
     private int skip;
-//
-//    /* 검색 타입 */
-//    private String type;
-//
-//    /* 검색 키워드 */
-//    private String keyword;
-//
-//    /* 작가 리스트 */
-//    private String[] authorArr;
-
-    /* 카테고리 코드 */
-    private String cateCode;
+    
+    /* 검색어 키워드 */
+    private String keyword;
 
     /* 상품 번호(댓글 기능에서 사용) */
     private int bookId;
@@ -44,11 +35,6 @@ public class Criteria {
     public Criteria(){
         this(1,10);
     }
-//
-//    /* 검색 타입 데이터 배열 변환 */
-//    public String[] getTypeArr() {
-//        return type == null? new String[] {}:type.split("");
-//    }
 
     public void setPageNum(int pageNum) {
         this.pageNum = pageNum;

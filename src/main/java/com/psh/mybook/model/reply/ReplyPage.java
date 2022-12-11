@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -12,8 +13,10 @@ import java.util.List;
 @ToString
 public class ReplyPage {
 
+    @NotNull
     List<Reply> list;
 
+    @NotNull
     Page pageInfo;
 
 

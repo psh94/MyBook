@@ -16,14 +16,16 @@ public class BookUpdateParam {
     @NotNull
     private int bookId;
 
-    private String isbn;
-
+    @NotNull
     private String bookName;
 
+    @NotNull
     private String author;
 
+    @NotNull
     private int price;
 
+    @NotNull
     private int quantity;
 
     private double discount;

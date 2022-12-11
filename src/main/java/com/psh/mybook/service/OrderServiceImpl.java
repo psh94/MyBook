@@ -73,34 +73,35 @@ public class OrderServiceImpl implements OrderService{
         //
         List<OrderItem> orderItemList = new ArrayList<>();
 
-        for(OrderItem orderItem : order.getOrders()) {
+        for(OrderItem orderItem : order.getOrderItems()) {
 
             OrderItem orderItemInfo = orderMapper.getOrderInfo(orderItem.getBookId());
 
             // 수량 셋팅
-            orderItem.setBookCount(orderItemInfo.getBookCount());
+            orderItemInfo.setBookCount(orderItemInfo.getBookCount());
 
             // 기본 정보 셋팅
-            orderItem.initSaleTotal();
+            orderItemInfo.initSaleTotal();
 
             //List 객체 추가
             orderItemList.add(orderItemInfo);
         }
         /* Order 셋팅 */
-        order.setOrders(orderItemList);
+        order.setOrderItems(orderItemList);
         order.getOrderPriceInfo();
 
         /*DB 주문,주문상품(,배송정보) 넣기*/
 
         /* orderId만들기 및 OrderDTO객체 orderId에 저장 */
+        //orderId의 형태는 "memberId_yyyyMMddmm"의 형태이다.
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
         String orderId = member.getMemberId() + format.format(date);
         order.setOrderId(orderId);
 
         /* db넣기 */
-        orderMapper.enrollOrder(order);		//vam_order 등록
-        for(OrderItem orderItem : order.getOrders()) {		//vam_orderItem 등록
+        orderMapper.enrollOrder(order);		// member_order 등록
+        for(OrderItem orderItem : order.getOrderItems()) {		//orderItem 등록
             orderItem.setOrderId(orderId);
             orderMapper.enrollOrderItem(orderItem);
         }
@@ -108,20 +109,22 @@ public class OrderServiceImpl implements OrderService{
         /* 비용 포인트 변동 적용 */
 
         /* 비용 차감 & 변동 돈(money) Member객체 적용 */
+        // member가 가진 money에서 orderFinalSalePrice를 뺀 값을 다시 momey에 세팅한다.
         int calMoney = member.getMoney();
         calMoney -= order.getOrderFinalSalePrice();
         member.setMoney(calMoney);
 
         /* 포인트 차감, 포인트 증가 & 변동 포인트(point) Member객체 적용 */
+        // member가 가진 point - 사용 point + 적립 point
         int calPoint = member.getPoint();
         calPoint = calPoint - order.getUsePoint() + order.getOrderSavePoint();	// 기존 포인트 - 사용 포인트 + 획득 포인트
         member.setPoint(calPoint);
 
-        /* 변동 돈, 포인트 DB 적용 */
+        /* 돈, 포인트 변동사항 DB에 적용 */
         orderMapper.reduceMoney(member);
 
         /* 재고 변동 적용 */
-        for(OrderItem orderItem : order.getOrders()) {
+        for(OrderItem orderItem : order.getOrderItems()) {
             /* 변동 재고 값 구하기 */
             Book book = bookMapper.getBooksInfo(orderItem.getBookId());
             book.setQuantity(book.getQuantity() - orderItem.getBookCount());
@@ -149,16 +152,17 @@ public class OrderServiceImpl implements OrderService{
         /* 주문, 주문상품 객체 */
         /*회원*/
         Member member = memberMapper.getMemberInfo(orderCancel.getMemberId());
-        /*주문상품*/
+
+        /* 주문상품 */
         List<OrderItem> orderItemList = orderMapper.getOrderItemInfo(orderCancel.getOrderId());
         for(OrderItem orderItem : orderItemList) {
             orderItem.initSaleTotal();
         }
         /* 주문 */
-        Order orderWarpper = orderMapper.getOrder(orderCancel.getOrderId());
-        orderWarpper.setOrders(orderItemList);
+        Order orderWrapper = orderMapper.getOrder(orderCancel.getOrderId());
+        orderWrapper.setOrderItems(orderItemList);
 
-        orderWarpper.getOrderPriceInfo();
+        orderWrapper.getOrderPriceInfo();
 
         /* 주문상품 취소 DB */
         orderMapper.orderCancle(orderCancel.getOrderId());
@@ -166,19 +170,19 @@ public class OrderServiceImpl implements OrderService{
         /* 돈, 포인트, 재고 변환 */
         /* 돈 */
         int calMoney = member.getMoney();
-        calMoney += orderWarpper.getOrderFinalSalePrice();
+        calMoney += orderWrapper.getOrderFinalSalePrice();
         member.setMoney(calMoney);
 
         /* 포인트 */
         int calPoint = member.getPoint();
-        calPoint = calPoint + orderWarpper.getUsePoint() - orderWarpper.getOrderSavePoint();
+        calPoint = calPoint + orderWrapper.getUsePoint() - orderWrapper.getOrderSavePoint();
         member.setPoint(calPoint);
 
         /* DB적용 */
         orderMapper.reduceMoney(member);
 
         /* 재고 */
-        for(OrderItem orderItem : orderWarpper.getOrders()) {
+        for(OrderItem orderItem : orderWrapper.getOrderItems()) {
             Book book = bookMapper.getBooksInfo(orderItem.getBookId());
             book.setQuantity(book.getQuantity() + orderItem.getBookCount());
             orderMapper.reduceStock(book);

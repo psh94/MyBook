@@ -2,6 +2,7 @@ package com.psh.mybook.service;
 
 import com.psh.mybook.mapper.BookMapper;
 import com.psh.mybook.mapper.ImageMapper;
+import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.book.Book;
 import com.psh.mybook.model.book.BookEnrollParam;
 import com.psh.mybook.model.book.BookInfo;
@@ -9,6 +10,8 @@ import com.psh.mybook.model.book.BookUpdateParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,8 +41,8 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public boolean isExistBookIsbn(String isbn) {
-        return bookMapper.isExistBookIsbn(isbn);
+    public boolean isExistBookId(int bookId) {
+        return bookMapper.isExistBookId(bookId);
     }
 
     @Override
@@ -79,5 +82,15 @@ public class BookServiceImpl implements BookService{
     @Override
     public Book getBookNameById(int bookId) {
         return bookMapper.getBookNameById(bookId);
+    }
+
+    @Override
+    public List<Book> getBookList(Criteria cri) {
+        return bookMapper.getBookList(cri);
+    }
+
+    @Override
+    public int getBookTotal(Criteria cri) {
+        return bookMapper.getBookTotal(cri);
     }
 }

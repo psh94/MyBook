@@ -21,9 +21,9 @@
   	</insert>
 
 	<!-- 책 등록 중복검사 -->
-	<select id="isExistBookIsbn" parameterType="com.psh.mybook.model.book.BookEnrollParam" resultType="boolean">
+	<select id="isExistBookId" parameterType="com.psh.mybook.model.book.BookEnrollParam" resultType="boolean">
 		select EXISTS
-		(select isbn from book where isbn = #{isbn})
+		(select bookId from book where bookId = #{bookId})
 	</select>
 
 	<!-- 책 정보 조회	-->
@@ -37,7 +37,7 @@
 
 	<!-- 책 등록 삭제	-->
 	<delete id="bookDelete">
-		delete from book where isbn = #{isbn}
+		delete from book where bookId = #{bookId}
 	</delete>
 
 	<select id="getBookNameById" resultType="com.psh.mybook.model.book.Book">
@@ -47,5 +47,34 @@
 
 
 	</select>
+
+	<!-- criteria(검색조건) -->
+	<sql id="criteria">
+		<if test="keyword != null">
+			where (bookName like concat ('%', #{keyword}, '%'))
+		</if>
+	</sql>
+
+	<!-- 상품 검색 -->
+	<select id="getBookList" resultType="com.psh.mybook.model.book.Book">
+
+		select  bookId, bookName, author, isbn, price, quantity, discount
+		from book
+		<include refid="criteria"></include>
+		order by bookId
+		desc limit #{skip}, #{amount}
+
+	</select>
+
+	<!-- 상품 총 개수 -->
+	<select id="getBookTotal" resultType="int">
+
+		select count(*) from book
+
+		<include refid="criteria"></include>
+
+	</select>
+
+
   	
   </mapper>

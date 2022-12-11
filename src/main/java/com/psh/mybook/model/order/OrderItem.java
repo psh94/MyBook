@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @ToString
@@ -13,15 +15,19 @@ public class OrderItem {
     private String orderId;
 
     /* 상품 번호 */
+    @NotNull
     private int bookId;
 
     /* 주문 수량 */
+    @NotNull
     private int bookCount;
 
-    /* vam_orderItem 기본키 */
+    /* orderItem 기본키 */
+    @NotNull
     private int orderItemId;
 
     /* 상품 한 개 가격 */
+    @NotNull
     private int bookPrice;
 
     /* 상품 할인 율 */
@@ -44,7 +50,7 @@ public class OrderItem {
     private int totalSavePoint;
 
 
-
+    // 데이터를 Order로 넘기기 전에 book 하나의 값들을 미리 계산한다.
     public void initSaleTotal() {
         this.salePrice = (int) (this.bookPrice * (1-this.bookDiscount));
         this.totalPrice = this.salePrice*this.bookCount;

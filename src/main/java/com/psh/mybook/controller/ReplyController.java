@@ -1,17 +1,21 @@
 package com.psh.mybook.controller;
 
 import com.psh.mybook.model.Criteria;
-import com.psh.mybook.model.book.Book;
 import com.psh.mybook.model.reply.Reply;
+import com.psh.mybook.model.reply.ReplyEnrollParam;
 import com.psh.mybook.model.reply.ReplyPage;
+import com.psh.mybook.model.reply.ReplyUpdateParam;
 import com.psh.mybook.service.BookService;
 import com.psh.mybook.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import static com.psh.mybook.utill.HttpResponses.RESPONSE_BAD_REQUEST;
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 
 @RestController
@@ -26,51 +30,32 @@ public class ReplyController {
 
     /* 댓글 등록 */
     @PostMapping("/enroll")
-    public ResponseEntity<Void> enrollReplyGET(Reply reply) {
-        replyService.enrollReply(reply);
+    public ResponseEntity<Void> enrollReply(ReplyEnrollParam param) {
 
-        return RESPONSE_OK;
-    }
+        try{
 
-    /* 리뷰 쓰기 */
-    @GetMapping("/enroll/{memberId}")
-    public ResponseEntity<Void> enrollReplyPOST(@PathVariable String memberId, int bookId, Model model) {
-        Book book = bookService.getBookNameById(bookId);
-        model.addAttribute("bookInfo", book);
-        model.addAttribute("memberId", memberId);
+            replyService.enrollReply(param);
+            return RESPONSE_OK;
 
-        return RESPONSE_OK;
-    }
+        } catch(Exception e){
 
-    /* 댓글 체크 */
-    /* memberId, bookId 파라미터 */
-    /* 존재 : 1 / 존재x : 0 */
-    @PostMapping("/check")
-    public String replyCheck(Reply reply) {
-        return replyService.checkReply(reply);
+            return RESPONSE_BAD_REQUEST;
+
+        }
+
     }
 
     /* 댓글 페이징 */
     @GetMapping("/list")
-    public ReplyPage replyList(Criteria cri) {
-        return replyService.replyList(cri);
-    }
-
-    /* 리뷰 수정 창 */
-    @GetMapping("/update")
-    public ResponseEntity<Void> replyModifyGET(Reply reply, Model model) {
-        Book book = bookService.getBookNameById(reply.getBookId());
-        model.addAttribute("bookInfo", book);
-        model.addAttribute("replyInfo", replyService.getUpdateReply(reply.getReplyId()));
-        model.addAttribute("memberId", reply.getMemberId());
-
+    public ResponseEntity<ReplyPage> replyList(Criteria cri) {
+        replyService.replyList(cri);
         return RESPONSE_OK;
     }
 
     /* 댓글 수정 */
     @PostMapping("/update")
-    public ResponseEntity<Void> replyModifyPOST(Reply reply) {
-        replyService.updateReply(reply);
+    public ResponseEntity<Void> replyModifyPOST(ReplyUpdateParam param) {
+        replyService.updateReply(param);
         return RESPONSE_OK;
     }
 

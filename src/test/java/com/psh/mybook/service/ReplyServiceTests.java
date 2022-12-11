@@ -1,12 +1,12 @@
 package com.psh.mybook.service;
 
 import com.psh.mybook.mapper.ReplyMapper;
-import com.psh.mybook.model.reply.Reply;
+import com.psh.mybook.model.reply.ReplyEnrollParam;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @ExtendWith({MockitoExtension.class})
 public class ReplyServiceTests {
@@ -14,7 +14,7 @@ public class ReplyServiceTests {
     @Mock
     ReplyMapper replyMapper;
 
-    @Autowired
+    @InjectMocks
     ReplyServiceImpl replyService;
 
     @Test
@@ -25,7 +25,7 @@ public class ReplyServiceTests {
         double rating = 4;
         String content = "댓글 테스트";
 
-        Reply reply = new Reply();
+        ReplyEnrollParam reply = new ReplyEnrollParam();
         reply.setMemberId(memberId);
         reply.setBookId(bookId);
         reply.setRating(rating);

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.psh.mybook.mapper.OrderMapper">
 
-	<!-- 주문 상품 정보 -->
+	<!-- 주문할 book에 대한 정보를 얻는다. -->
 	<select id="getBooksInfo" resultType="com.psh.mybook.model.order.OrderPageItem">
 
 		select bookId, bookName, price, discount
@@ -12,6 +12,7 @@
 
 	</select>
 
+	<!-- 주문 정보 -->
 	<select id="getOrderInfo" resultType="com.psh.mybook.model.order.OrderItem">
 
 		select bookId, price, discount
@@ -19,7 +20,7 @@
 
 	</select>
 
-	<!-- 주문 테이블 등록 -->
+	<!-- 주문 등록 -->
 	<insert id="enrollOrder">
 
 		insert into member_order(orderId, takerName, memberId, address, orderState, deliveryCost, usePoint)
@@ -27,7 +28,7 @@
 
 	</insert>
 
-	<!-- 주문 아이템 테이블 등록 -->
+	<!-- 주문 아이템 등록 -->
 	<insert id="enrollOrderItem">
 
 		insert into orderItem(orderId, bookId, bookCount, bookPrice, bookDiscount, savePoint)
@@ -49,6 +50,7 @@
 
 	</update>
 
+	<!-- 주문 장바구니 삭제 -->
 	<delete id="deleteOrderCart">
 
 		delete from cart where memberId = #{memberId} and bookId = #{bookId}

@@ -5,26 +5,17 @@
   <mapper namespace="com.psh.mybook.mapper.ReplyMapper">
 
 	<!-- 댓글등록 -->
-  	<insert id="enrollReply">
+  	<insert id="enrollReply" parameterType="com.psh.mybook.model.reply.ReplyEnrollParam">
 
   		insert into reply(bookId, memberId, content, rating) values (#{bookId}, #{memberId}, #{content}, #{rating})
 
   	</insert>
 
-	<select id="checkReply" resultType="integer">
-
-		select replyId from reply
-		where memberId = #{memberId} and bookId = #{bookId}
-
-	</select>
-
-	<!-- 댓글 페이징 -->
 	<select id="getReplyList" resultType="com.psh.mybook.model.reply.Reply">
 
 		select replyId, bookId, memberId, content, rating, regDate
 		from reply
 		where bookId = #{bookId}
-		order by regDate desc limit #{skip}, #{amount}
 
 	</select>
 
@@ -37,19 +28,12 @@
 	</select>
 
 	<!-- 댓글수정 -->
-	<update id="updateReply">
+	<update id="updateReply" parameterType="com.psh.mybook.model.reply.ReplyUpdateParam">
 
 		update reply set content = #{content}, rating = #{rating}
 		where replyId = #{replyId}
 
 	</update>
-
-	<select id="getUpdateReply" resultType="com.psh.mybook.model.reply.Reply">
-
-		select * from reply
-		where replyId = #{replyId}
-
-	</select>
 
 	<!-- 댓글 삭제 -->
 	<delete id="deleteReply">

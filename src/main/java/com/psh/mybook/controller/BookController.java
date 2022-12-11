@@ -1,5 +1,7 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.model.Criteria;
+import com.psh.mybook.model.Page;
 import com.psh.mybook.model.book.*;
 import com.psh.mybook.service.BookService;
 import com.psh.mybook.service.ImageService;
@@ -38,7 +40,7 @@ public class BookController {
 
         }
 
-        boolean existedBook = bookService.isExistBookIsbn(bookEnrollParam.getIsbn());
+        boolean existedBook = bookService.isExistBookId(bookEnrollParam.getBookId());
 
         if(existedBook) {
             return RESPONSE_CONFLICT;
@@ -50,7 +52,7 @@ public class BookController {
 
     @GetMapping("/detail/{bookId}")
     public BookInfo bookDetail(@PathVariable int bookId, Model model){
-        model.addAttribute("booksInfo", bookService.bookGet(bookId));
+        model.addAttribute("bookInfo", bookService.bookGet(bookId));
        return bookService.bookGet(bookId);
     }
 
@@ -58,7 +60,7 @@ public class BookController {
 
     @PostMapping("/update")
     public ResponseEntity<Void> bookUpdate(@Valid @ModelAttribute BookUpdateParam param){
-        boolean existedBook = bookService.isExistBookIsbn(param.getIsbn());
+        boolean existedBook = bookService.isExistBookId(param.getBookId());
 
         if(!existedBook) {
 
@@ -82,6 +84,8 @@ public class BookController {
 
         //이미지 정보를 먼저 지워준다.
         List<AttachImage> fileList = imageService.getAttachInfo(book.getBookId());
+        System.out.println(imageService);
+        System.out.println(fileList);
 
         if(fileList != null) {
 
@@ -102,19 +106,41 @@ public class BookController {
             pathList.forEach(path ->{
                 path.toFile().delete();
             });
+        } else {
+
         }
 
         System.out.println(book);
 
 
         // 상품을 제거한다.
-        if(book.getIsbn() != null){
+        if(book.getBookId() != 0){
             bookService.bookDelete(book);
             return RESPONSE_OK;
         }
 
 
         return RESPONSE_BAD_REQUEST;
+    }
+
+
+    @GetMapping("/search")
+    public ResponseEntity<Void> searchBook(Criteria cri, Model model){
+
+        List<Book> list = bookService.getBookList(cri);
+        if(!list.isEmpty()){
+
+            model.addAttribute("list",list);
+
+        }else {
+
+            model.addAttribute("listcheck", "empty");
+            return RESPONSE_CONFLICT;
+        }
+
+        model.addAttribute("pageMaker", new Page(cri, bookService.getBookTotal(cri)));
+
+        return RESPONSE_OK;
     }
 
 

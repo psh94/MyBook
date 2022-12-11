@@ -4,7 +4,9 @@ import com.psh.mybook.mapper.ReplyMapper;
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.Page;
 import com.psh.mybook.model.reply.Reply;
+import com.psh.mybook.model.reply.ReplyEnrollParam;
 import com.psh.mybook.model.reply.ReplyPage;
+import com.psh.mybook.model.reply.ReplyUpdateParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,41 +18,29 @@ public class ReplyServiceImpl implements ReplyService{
 
 
     @Override
-    public int enrollReply(Reply reply) {
-        return replyMapper.enrollReply(reply);
-    }
-
-    @Override
-    public String checkReply(Reply reply) {
-
-        if(replyMapper.checkReply(reply) == null) {
-
-            return "0";
-        } else {
-            return "1";
-        }
+    public int enrollReply(ReplyEnrollParam param) {
+        return replyMapper.enrollReply(param);
     }
 
     @Override
     public ReplyPage replyList(Criteria cri) {
+        // reply가 list로 있는 객체 생성
         ReplyPage replyPage = new ReplyPage();
 
+        // bookId를 통해 reply 정보 추출,
         replyPage.setList(replyMapper.getReplyList(cri));
+        // cri에서 얻은 book의 정보로 reply의 전체 개수를 얻어 페이지 구성
         replyPage.setPageInfo(new Page(cri, replyMapper.getReplyTotal(cri.getBookId())));
 
+        // reply 전체를 나타내는 replyPage 반환
         return replyPage;
     }
 
     @Override
-    public int updateReply(Reply reply) {
-        return replyMapper.enrollReply(reply);
+    public int updateReply(ReplyUpdateParam param) {
+        return replyMapper.updateReply(param);
     }
 
-    @Override
-    public Reply getUpdateReply(int replyId) {
-
-        return replyMapper.getUpdateReply(replyId);
-    }
 
     @Override
     public int deleteReply(Reply dto) {

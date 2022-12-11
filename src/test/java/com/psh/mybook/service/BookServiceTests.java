@@ -95,7 +95,6 @@ public class BookServiceTests {
     public void bookUpdateTest(){
         BookUpdateParam bookUpdateParam = new BookUpdateParam();
         bookUpdateParam.setBookId(7);
-        bookUpdateParam.setIsbn("9788982214471");
         bookUpdateParam.setBookName("연금");
         bookUpdateParam.setAuthor("파울로");
         bookUpdateParam.setPrice(10800);

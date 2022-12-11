@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static com.psh.mybook.utill.HttpResponses.*;
+
 
 @RestController
 @Slf4j
@@ -36,30 +38,35 @@ public class ImageController {
     private final ImageMapper imageMapper;
 
     /* 첨부 파일 업로드 */
-    @PostMapping("/admin/uploadImage")
-    public ResponseEntity<List<AttachImage>> uploadImage(MultipartFile[] uploadFile) {
+    @PostMapping("/uploadImage")
+    public ResponseEntity<Void> uploadImage(MultipartFile[] uploadFile) {
 
         /* 이미지 파일 체크 */
         for (MultipartFile multipartFile : uploadFile) {
 
+            // 뷰로부터 전달받은 파일 이름을 그대로 사용
             File checkfile = new File(multipartFile.getOriginalFilename());
             String type = null;
 
             try {
 
+                // probeContentType : MIME TYPE을 반환해준다.
+                // MIME TYPE : 파일이 어떤 종류의 파일인지에 대한 정보가 담긴 라벨이다.
                 type = Files.probeContentType(checkfile.toPath());
                 log.info("MIME TYPE : " + type);
 
             } catch (IOException e) {
 
                 e.printStackTrace();
+                return RESPONSE_CONFLICT;
 
             }
 
+            //타입이 image가 아니면
             if (!type.startsWith("image")) {
 
                 List<AttachImage> list = null;
-                return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+                return RESPONSE_BAD_REQUEST;
 
             }
 
@@ -75,13 +82,15 @@ public class ImageController {
 
         String str = sdf.format(date);
 
+        // 구분자 (-)를 File.separator로 바꾼다.
         String datePath = str.replace("-", File.separator);
 
 
         /* 폴더 생성 */
         File uploadPath = new File(uploadFolder, datePath);
 
-        if (uploadPath.exists() == false) {
+        // 업로드 경로(uploadPath)가 존재하지 않으면
+        if (!uploadPath.exists()) {
             uploadPath.mkdirs();
         }
 
@@ -108,6 +117,7 @@ public class ImageController {
 
             /* 파일 저장 */
             try {
+                multipartFile.transferTo(saveFile);
 
                 File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
 
@@ -126,13 +136,14 @@ public class ImageController {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                return RESPONSE_CONFLICT;
             }
 
             list.add(attachImage);
         }
         ResponseEntity<List<AttachImage>> result = new ResponseEntity<List<AttachImage>>(list, HttpStatus.OK);
 
-        return result;
+        return RESPONSE_OK;
     }
 
     // 이미지 출력

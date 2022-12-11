@@ -10,6 +10,7 @@ import com.psh.mybook.model.order.OrderPage;
 import com.psh.mybook.service.LoginService;
 import com.psh.mybook.service.MemberService;
 import com.psh.mybook.service.OrderService;
+import com.psh.mybook.utill.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -33,18 +34,24 @@ public class OrderController {
     private final MemberService memberService;
     private final LoginService loginService;
 
+
+    // 책, 회원 정보를 보여준다.
     @GetMapping("/{memberId}")
-    public ResponseEntity<Void> orderPage(@PathVariable String memberId, OrderPage orderPage, Model model) {
+    public String orderPageGET(@PathVariable String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
-        model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
+        // bookId, bookName, price, discount, bookCount가 List 형태로 들어 있는 orderPageItem 객체들
 
-        return RESPONSE_OK;
+        model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
+        // memberId, password, name, adminCk, money, point가 들어 있는 member 객체
+
+
+        return "/order";
 
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> orderPage(Order order, HttpServletRequest request){
+    public ResponseEntity<Void> orderPagePOST(Order order, HttpServletRequest request){
 
         orderService.order(order);
 
@@ -56,7 +63,7 @@ public class OrderController {
         try {
             Member memberLogin = loginService.memberLogin(member);
             memberLogin.setPassword("");
-            session.setAttribute("member", memberLogin);
+            session.setAttribute(SessionConst.LOGIN_MEMBER, memberLogin);
 
         } catch (Exception e) {
 
@@ -67,7 +74,12 @@ public class OrderController {
         return RESPONSE_OK;
     }
 
+
+
+
+
     /* 주문 현황 페이지 */
+    // admin이 주문 현황을 확인
     @GetMapping("/list")
     public ResponseEntity<Void> orderList(Criteria cri, Model model) {
 

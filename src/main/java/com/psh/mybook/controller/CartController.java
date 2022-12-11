@@ -1,9 +1,9 @@
 package com.psh.mybook.controller;
 
-import com.psh.mybook.annotation.Login;
 import com.psh.mybook.model.cart.Cart;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.service.CartService;
+import com.psh.mybook.utill.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -22,11 +22,16 @@ public class CartController {
     private final CartService cartService;
 
     @PostMapping("/add")
-    public int addCartPOST(@Login Cart cart, HttpServletRequest request) {
+    public int addCart(Cart cart, HttpServletRequest request) {
 
         // 로그인 체크
         HttpSession session = request.getSession();
-        Member member = (Member)session.getAttribute("member");
+        Member member = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        System.out.println(request);
+        System.out.println(session);
+        System.out.println(session.getAttribute(SessionConst.LOGIN_MEMBER));
+        System.out.println(member);
 
         // 멤버가 null 이면 5를 반환
         if(member == null) {

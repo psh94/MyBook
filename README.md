@@ -14,8 +14,7 @@
 
 ## Application UI
 
-https://github.com/psh94/MyBook/wiki/Application-UI
-
+https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
 ## Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case

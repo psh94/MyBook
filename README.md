@@ -7,6 +7,7 @@
 - JAVA 11
 - MyBatis 2.3.0
 - MySQL
+- Gradle
 - Quartz
 - Spring Security(Crypto)
 - IntelliJ

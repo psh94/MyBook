@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -121,7 +122,8 @@ public class MemberController {
 	}
 
 	@GetMapping("/members/update")
-	public ResponseEntity<Void> memberUpdate(@ModelAttribute String memberId){
+	public ResponseEntity<Void> memberUpdate(String memberId, Model model){
+		model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
 
 		log.info("회원 업데이트 페이지");
 

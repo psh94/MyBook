@@ -68,9 +68,9 @@ public class AttachFileCheckTask {
         File[] targetFile = targetDir.listFiles();
 
 
-        //removeFileList에는 삭제할 file list를 담아둔다.
-        //removeFileList에는 targetFile이 담겨 있다.
-        //이를 checkFile과 비교해 equals가 성립한다면 removeFileList에서 제거한다. (제거 목록에서 빠짐)
+        // removeFileList에는 삭제할 file list를 담아둔다.
+        // removeFileList에는 targetFile이 담겨 있다.
+        // 이를 checkFile과 비교해 equals가 성립한다면 removeFileList에서 제거한다. (제거 목록에서 빠짐)
         List<File> removeFileList = new ArrayList<File>(Arrays.asList(targetFile));
 
         for(File file : targetFile){

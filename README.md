@@ -16,12 +16,14 @@
 
 https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
+
+## ERD
+![erd](https://user-images.githubusercontent.com/84213252/206838089-aa367fc7-4124-42fb-a937-82575c940064.PNG)
+
 ## Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case
 
 
-## ERD
-![erd](https://user-images.githubusercontent.com/84213252/206838089-aa367fc7-4124-42fb-a937-82575c940064.PNG)
 
 ## URL
 ![url 정리](https://user-images.githubusercontent.com/84213252/207079181-b55e4d65-efe7-40f2-96f7-04f11b18629d.PNG)

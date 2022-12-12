@@ -23,7 +23,7 @@ import static com.psh.mybook.utill.HttpResponses.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/book")
+@RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
 
@@ -32,6 +32,7 @@ public class BookController {
     private final ImageService imageService;
 
 
+    // 책 등록
     @PostMapping("/enroll")
     public ResponseEntity<Void> bookEnroll(@Valid @ModelAttribute BookEnrollParam bookEnrollParam, BindingResult bindingResult){
 
@@ -50,15 +51,17 @@ public class BookController {
         }
     }
 
-    @GetMapping("/detail/{bookId}")
-    public Book bookDetail(@PathVariable int bookId, Model model){
+    // 책 조회
+    @GetMapping("/")
+    public Book bookDetail(int bookId, Model model){
         model.addAttribute("bookInfo", bookService.getBookInfo(bookId));
        return bookService.getBookInfo(bookId);
     }
 
 
 
-    @PostMapping("/update")
+    // 책 업데이트
+    @PutMapping("/update")
     public ResponseEntity<Void> bookUpdate(@Valid @ModelAttribute BookUpdateParam param){
         boolean existedBook = bookService.isExistBookId(param.getBookId());
 
@@ -77,8 +80,8 @@ public class BookController {
 
 
     // image 테이블은 book 테이블의 bookId를 외래키로 받기 때문에 book 테이블의 데이터가 사라지면 에러가 발생한다.
-    // 그렇기 때문에 bookId를 갖고 있는 book의 데이터를 지우기에 앞서 image의 데이터를 먼저 지워야 한다.
-
+    // 그렇기 때문에 bookId를 갖고 있는 book의 데이터를 지우기에 앞서 image 데이터를 먼저 지워야 한다.
+    // 책 삭제
     @PostMapping("/delete")
     public ResponseEntity<Void> bookDelete(@Valid Book book){
 
@@ -124,6 +127,7 @@ public class BookController {
     }
 
 
+    // 책 검색
     @GetMapping("/search")
     public ResponseEntity<Void> searchBook(Criteria cri, Model model){
 

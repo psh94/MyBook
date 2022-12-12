@@ -51,7 +51,7 @@ public class OrderServiceTests {
 
 
 
-        ord.setOrders(orders);
+        ord.setOrderItems(orders);
 
         ord.setOrderId("2021_test1");
         ord.setTakerName("test");
@@ -102,7 +102,7 @@ public class OrderServiceTests {
         Book book = new Book();
 
         book.setBookId(3);
-        book.setQuantity(77);
+        book.setBookCount(77);
 
         orderMapper.reduceStock(book);
     }

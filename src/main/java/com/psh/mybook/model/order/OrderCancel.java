@@ -4,13 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @ToString
 public class OrderCancel {
 
+    @NotNull
     private String memberId;
 
+    @NotNull
     private String orderId;
 
     private String keyword;

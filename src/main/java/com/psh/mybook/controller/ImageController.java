@@ -31,14 +31,14 @@ import static com.psh.mybook.utill.HttpResponses.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/image")
+@RequestMapping("/images")
 @RequiredArgsConstructor
 public class ImageController {
 
     private final ImageMapper imageMapper;
 
     /* 첨부 파일 업로드 */
-    @PostMapping("/uploadImage")
+    @PostMapping("/upload")
     public ResponseEntity<Void> uploadImage(MultipartFile[] uploadFile) {
 
         /* 이미지 파일 체크 */

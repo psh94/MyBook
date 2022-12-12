@@ -47,8 +47,8 @@ public class BookServiceTests {
         book.setBookName("연금술사");
         book.setAuthor("코엘료 파울로");
         book.setIsbn("9788982814471");
-        book.setPrice(10800);
-        book.setQuantity(500);
+        book.setBookPrice(10800);
+        book.setBookCount(500);
 
         List<AttachImage> imageList = new ArrayList<AttachImage>();
 
@@ -79,8 +79,8 @@ public class BookServiceTests {
         book2.setBookName("연금술사");
         book2.setAuthor("코엘료 파울로");
         book2.setIsbn("9788982814473");
-        book2.setPrice(10800);
-        book2.setQuantity(500);
+        book2.setBookPrice(10800);
+        book2.setBookCount(500);
 
         assertThat(book2.getIsbn()).isNotEqualTo(book.getIsbn());
 
@@ -97,9 +97,9 @@ public class BookServiceTests {
         bookUpdateParam.setBookId(7);
         bookUpdateParam.setBookName("연금");
         bookUpdateParam.setAuthor("파울로");
-        bookUpdateParam.setPrice(10800);
-        bookUpdateParam.setQuantity(500);
-        bookUpdateParam.setDiscount(10);
+        bookUpdateParam.setBookPrice(10800);
+        bookUpdateParam.setBookCount(500);
+        bookUpdateParam.setBookDiscount(10);
 
         List<AttachImage> imageList = new ArrayList<AttachImage>();
 

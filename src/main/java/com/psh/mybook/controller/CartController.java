@@ -44,13 +44,12 @@ public class CartController {
 
 
     @GetMapping("/{memberId}")
-    public ResponseEntity<Void> cartPage(@PathVariable String memberId, Model model) {
-
-        model.addAttribute("cartInfo", cartService.getCartList(memberId));
+    public ResponseEntity<Void> cartPage(@PathVariable @ModelAttribute String memberId, Model model) {
         return RESPONSE_OK;
     }
 
-    @PostMapping("/updateCount")
+
+    @PutMapping("/update")
     public ResponseEntity<Void> updateCart(Cart cart) {
 
         cartService.modifyCount(cart);
@@ -59,7 +58,7 @@ public class CartController {
 
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteCart(Cart cart) {
 
         cartService.deleteCart(cart.getCartId());

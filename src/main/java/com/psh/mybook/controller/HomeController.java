@@ -16,13 +16,13 @@ import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 @Slf4j
 public class HomeController {
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public ResponseEntity<Void> home(){
 		return RESPONSE_OK;
 	}
 
 
-	@PostMapping("/")
+	@PostMapping("/main")
 	public ResponseEntity<Void> homeLogin(@Login MemberLoginParam loginMember, Model model) {
 
 		// session에 loginMember가 없을 때,

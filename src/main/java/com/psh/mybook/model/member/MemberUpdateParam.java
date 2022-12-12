@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -11,16 +12,15 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public class MemberUpdateParam {
 
-	@NotBlank
 	private String memberId;
 
-	@NotBlank
+	@NotBlank(message = "비밀번호를 입력하시오.")
 	private String password;
 
-	@NotBlank
+	@Email(message = "이메일를 입력하시오.")
 	private String email;
 
-	@NotBlank
+	@NotBlank(message = "주소를 입력하시오.")
 	private String address;
 
 }

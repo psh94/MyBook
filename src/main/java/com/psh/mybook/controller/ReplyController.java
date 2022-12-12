@@ -10,10 +10,7 @@ import com.psh.mybook.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_BAD_REQUEST;
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
@@ -45,7 +42,7 @@ public class ReplyController {
 
     }
 
-    /* 댓글 페이징 */
+    /* 댓글 조회, 페이징 */
     @GetMapping("/list")
     public ResponseEntity<ReplyPage> replyList(Criteria cri) {
         replyService.replyList(cri);
@@ -53,14 +50,14 @@ public class ReplyController {
     }
 
     /* 댓글 수정 */
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Void> replyModifyPOST(ReplyUpdateParam param) {
         replyService.updateReply(param);
         return RESPONSE_OK;
     }
 
     /* 댓글 삭제 */
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<Void> replyDelete(Reply reply) {
         replyService.deleteReply(reply);
         return RESPONSE_OK;

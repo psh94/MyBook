@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -17,10 +16,8 @@ public class ReplyUpdateParam {
 
     private int bookId;
 
-    @NotNull
     private String content;
 
-    @NotNull
     private double rating;
 
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")

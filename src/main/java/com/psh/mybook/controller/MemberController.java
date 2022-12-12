@@ -1,6 +1,5 @@
 package com.psh.mybook.controller;
 
-import com.psh.mybook.annotation.Login;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.model.member.MemberJoinParam;
 import com.psh.mybook.model.member.MemberLoginParam;
@@ -24,16 +23,18 @@ import static com.psh.mybook.utill.HttpResponses.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/member")
 public class MemberController {
 
 	private final MemberService memberService;
 
 	private final LoginService loginService;
 
+
+
+
 	//회원가입
 	@PostMapping("/join")
-	public ResponseEntity<Void> join(@Valid @ModelAttribute MemberJoinParam param, BindingResult bindingResult) throws Exception{
+	public ResponseEntity<Void> join(@Valid MemberJoinParam param, BindingResult bindingResult) throws Exception{
 
 		if(bindingResult.hasErrors()){
 			return RESPONSE_BAD_REQUEST;
@@ -65,43 +66,9 @@ public class MemberController {
 
 	}
 
-
-	@GetMapping("/member/{memberId}")
-	public ResponseEntity<Void> getMember(@Login @PathVariable String memberId){
-		memberService.getMemberInfo(memberId);
-		return RESPONSE_OK;
-	}
-
-
-
-	@PostMapping("/member/update")
-	public ResponseEntity<Void> memberUpdate(@Valid @ModelAttribute MemberUpdateParam param, BindingResult bindingResult){
-
-		if(bindingResult.hasErrors()){
-			return RESPONSE_BAD_REQUEST;
-		}
-
-		memberService.memberUpdate(param);
-		return RESPONSE_OK;
-
-	}
-
-	@PostMapping("/member/delete")
-	public ResponseEntity<Void> memberDelete(Member member){
-
-		if(member !=null) {
-			memberService.memberDelete(member);
-			return RESPONSE_OK;
-		}
-
-		return RESPONSE_BAD_REQUEST;
-	}
-
-
-
 	/* 로그인 */
 	@PostMapping("/login")
-	public ResponseEntity<Void> loginPOST(@Valid @ModelAttribute MemberLoginParam param, BindingResult bindingResult, HttpServletRequest request) throws Exception {
+	public ResponseEntity<Void> loginPOST(@Valid MemberLoginParam param, BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -135,17 +102,58 @@ public class MemberController {
 
 	}
 
-    // session을 제거해서 로그아웃
-   	@GetMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest request){
+	// session을 제거해서 로그아웃
+	@GetMapping("/logout")
+	public ResponseEntity<Void> logout(HttpServletRequest request){
 
-        HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 
-        session.invalidate();
+		session.invalidate();
 
 		return RESPONSE_OK;
 
-    }
+	}
+
+	@GetMapping("/members")
+	public ResponseEntity<Void> getMember(@PathVariable String memberId){
+		memberService.getMemberInfo(memberId);
+		return RESPONSE_OK;
+	}
+
+	@GetMapping("/members/update")
+	public ResponseEntity<Void> memberUpdate(@ModelAttribute String memberId){
+
+		log.info("회원 업데이트 페이지");
+
+		return RESPONSE_OK;
+	}
+
+
+
+	@PutMapping("/members/update")
+	public ResponseEntity<Void> memberUpdate(@Valid MemberUpdateParam param, BindingResult bindingResult){
+
+		if(bindingResult.hasErrors()){
+			return RESPONSE_BAD_REQUEST;
+		}
+
+		memberService.memberUpdate(param);
+		return RESPONSE_OK;
+
+	}
+
+	@DeleteMapping("/members/delete")
+	public ResponseEntity<Void> memberDelete(Member member){
+
+		if(member !=null) {
+			memberService.memberDelete(member);
+			return RESPONSE_OK;
+		}
+
+		return RESPONSE_BAD_REQUEST;
+	}
+
+
 
 
 }

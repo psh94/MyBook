@@ -16,6 +16,8 @@ public class MemberServiceImpl implements MemberService {
 
 	private final MemberMapper memberMapper;
 
+
+
 	@Override
 	public void memberJoin(MemberJoinParam param) {
 
@@ -25,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
 
 		memberMapper.memberJoin(param);
 	}
+
 
 	@Override
 	public boolean isExistMemberId(String memberId) {
@@ -39,6 +42,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void memberUpdate(MemberUpdateParam param) {
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encryptedPassword = passwordEncoder.encode(param.getPassword());
+		param.setPassword(encryptedPassword);
+
 		memberMapper.memberUpdate(param);
 	}
 

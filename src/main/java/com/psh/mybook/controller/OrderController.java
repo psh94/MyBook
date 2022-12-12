@@ -27,7 +27,7 @@ import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -37,34 +37,30 @@ public class OrderController {
 
     // 책, 회원 정보를 보여준다.
     @GetMapping("/{memberId}")
-    public String orderPageGET(@PathVariable String memberId, OrderPage orderPage, Model model) {
+    public String orderPage(@PathVariable String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
-        // bookId, bookName, bookPrice, bookDiscount, bookCount가 List 형태로 들어 있는 orderPageItem 객체들
-
         model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
-        // memberId, password, name, adminCk, money, point가 들어 있는 member 객체
 
-
-        return "/order";
+        return "/orders";
 
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> orderPagePOST(Order order, HttpServletRequest request){
+    public ResponseEntity<Void> orderPage(Order order, HttpServletRequest request){
 
         orderService.order(order);
 
-        MemberLoginParam member1 = new MemberLoginParam();
-        member1.setMemberId(order.getMemberId());
-        member1.setPassword("");
-        System.out.println(member1);
+        MemberLoginParam member = new MemberLoginParam();
+        member.setMemberId(order.getMemberId());
+        member.setPassword("");
+        System.out.println(member);
 
         HttpSession session = request.getSession();
 
         try {
-            System.out.println(member1);
-            Member memberLogin = loginService.memberLogin(member1);
+            System.out.println(member);
+            Member memberLogin = loginService.memberLogin(member);
             session.setAttribute(SessionConst.LOGIN_MEMBER, memberLogin);
 
         } catch (Exception e) {
@@ -77,6 +73,7 @@ public class OrderController {
     }
 
     /* 주문취소 */
+    // 주문을 삭제하는 것이 아닌 주문 상태를 '주문취소'로 만든다.
     @PostMapping("/cancel")
     public ResponseEntity<Void> orderCancle(OrderCancel orderCancel) {
 

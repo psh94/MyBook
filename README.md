@@ -7,6 +7,7 @@
 - JAVA 11
 - MyBatis 2.3.0
 - MySQL
+- Gradle
 - Quartz
 - Spring Security(Crypto)
 - IntelliJ
@@ -14,18 +15,16 @@
 
 ## Application UI
 
-https://github.com/psh94/MyBook/wiki/Application-UI
-
-예시)![예시](https://user-images.githubusercontent.com/84213252/206840722-7af81627-9535-4c07-bea0-cd58f52fa891.PNG)
+https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
 
+## ERD
+![erd](https://user-images.githubusercontent.com/84213252/206838089-aa367fc7-4124-42fb-a937-82575c940064.PNG)
 
 ## Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case
 
 
-## ERD
-![erd](https://user-images.githubusercontent.com/84213252/206838089-aa367fc7-4124-42fb-a937-82575c940064.PNG)
 
 ## URL
 ![url 정리](https://user-images.githubusercontent.com/84213252/207079181-b55e4d65-efe7-40f2-96f7-04f11b18629d.PNG)

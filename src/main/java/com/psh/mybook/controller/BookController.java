@@ -51,9 +51,9 @@ public class BookController {
     }
 
     @GetMapping("/detail/{bookId}")
-    public BookInfo bookDetail(@PathVariable int bookId, Model model){
-        model.addAttribute("bookInfo", bookService.bookGet(bookId));
-       return bookService.bookGet(bookId);
+    public Book bookDetail(@PathVariable int bookId, Model model){
+        model.addAttribute("bookInfo", bookService.getBookInfo(bookId));
+       return bookService.getBookInfo(bookId);
     }
 
 

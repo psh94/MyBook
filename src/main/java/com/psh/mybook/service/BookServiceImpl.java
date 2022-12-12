@@ -5,7 +5,6 @@ import com.psh.mybook.mapper.ImageMapper;
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.book.Book;
 import com.psh.mybook.model.book.BookEnrollParam;
-import com.psh.mybook.model.book.BookInfo;
 import com.psh.mybook.model.book.BookUpdateParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,12 +45,12 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookInfo bookGet(int bookId) {
+    public Book getBookInfo(int bookId) {
 
-            BookInfo bookInfo = bookMapper.bookGet(bookId);
-            bookInfo.setImageList(imageMapper.getAttachInfo(bookId));
+            Book book = bookMapper.getBooksInfo(bookId);
+            book.setImageList(imageMapper.getAttachInfo(bookId));
 
-            return bookInfo;
+            return book;
     }
 
     @Transactional

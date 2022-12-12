@@ -20,11 +20,11 @@ public class Book {
 
     private String isbn;
 
-    private int price;
+    private int bookPrice;
 
-    private int quantity;
+    private int bookCount;
 
-    private double discount;
+    private double bookDiscount;
 
     private Date regDate;
 

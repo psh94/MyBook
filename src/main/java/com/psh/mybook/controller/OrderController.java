@@ -40,7 +40,7 @@ public class OrderController {
     public String orderPageGET(@PathVariable String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
-        // bookId, bookName, price, discount, bookCount가 List 형태로 들어 있는 orderPageItem 객체들
+        // bookId, bookName, bookPrice, bookDiscount, bookCount가 List 형태로 들어 있는 orderPageItem 객체들
 
         model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
         // memberId, password, name, adminCk, money, point가 들어 있는 member 객체
@@ -55,14 +55,16 @@ public class OrderController {
 
         orderService.order(order);
 
-        MemberLoginParam member = new MemberLoginParam();
-        member.setMemberId(order.getMemberId());
+        MemberLoginParam member1 = new MemberLoginParam();
+        member1.setMemberId(order.getMemberId());
+        member1.setPassword("");
+        System.out.println(member1);
 
         HttpSession session = request.getSession();
 
         try {
-            Member memberLogin = loginService.memberLogin(member);
-            memberLogin.setPassword("");
+            System.out.println(member1);
+            Member memberLogin = loginService.memberLogin(member1);
             session.setAttribute(SessionConst.LOGIN_MEMBER, memberLogin);
 
         } catch (Exception e) {
@@ -74,7 +76,15 @@ public class OrderController {
         return RESPONSE_OK;
     }
 
+    /* 주문취소 */
+    @PostMapping("/cancel")
+    public ResponseEntity<Void> orderCancle(OrderCancel orderCancel) {
 
+        orderService.orderCancle(orderCancel);
+
+        return RESPONSE_OK;
+
+    }
 
 
 
@@ -95,13 +105,5 @@ public class OrderController {
         return RESPONSE_OK;
     }
 
-    /* 주문삭제 */
-    @PostMapping("/cancel")
-    public ResponseEntity<Void> orderCancle(OrderCancel orderCancel) {
 
-        orderService.orderCancle(orderCancel);
-
-        return RESPONSE_OK;
-
-    }
 }

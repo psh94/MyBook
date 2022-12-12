@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
-
 @Getter
 @Setter
 @ToString
@@ -14,20 +12,17 @@ public class OrderItem {
     /* 주문 번호 */
     private String orderId;
 
+    /* orderItem 기본키 */
+    private int orderItemId;
+
     /* 상품 번호 */
-    @NotNull
     private int bookId;
 
     /* 주문 수량 */
-    @NotNull
     private int bookCount;
 
-    /* orderItem 기본키 */
-    @NotNull
-    private int orderItemId;
 
     /* 상품 한 개 가격 */
-    @NotNull
     private int bookPrice;
 
     /* 상품 할인 율 */

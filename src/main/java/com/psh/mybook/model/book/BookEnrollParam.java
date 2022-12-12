@@ -25,12 +25,12 @@ public class BookEnrollParam {
     private String isbn;
 
     @NotNull
-    private int price;
+    private int bookPrice;
 
     @NotNull
-    private int quantity;
+    private int bookCount;
 
-    private double discount;
+    private double bookDiscount;
 
     private Date regDate;
 

@@ -4,14 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
-
 @Getter
 @Setter
 @ToString
 public class OrderCancel {
 
-    @NotNull
     private String memberId;
 
     private String orderId;

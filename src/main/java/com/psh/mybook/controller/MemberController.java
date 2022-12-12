@@ -22,9 +22,9 @@ import javax.validation.Valid;
 import static com.psh.mybook.utill.HttpResponses.*;
 
 @RestController
-@RequestMapping("/member")
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/member")
 public class MemberController {
 
 	private final MemberService memberService;
@@ -51,7 +51,7 @@ public class MemberController {
 		}
 	}
 
-	@PostMapping("/memberIdChk")
+	@PostMapping("/join/memberIdChk")
 	@ResponseBody
 	public ResponseEntity<Void> memberChkId(String memberId){
 
@@ -66,7 +66,7 @@ public class MemberController {
 	}
 
 
-	@GetMapping("/{memberId}")
+	@GetMapping("/member/{memberId}")
 	public ResponseEntity<Void> getMember(@Login @PathVariable String memberId){
 		memberService.getMemberInfo(memberId);
 		return RESPONSE_OK;
@@ -74,7 +74,7 @@ public class MemberController {
 
 
 
-	@PostMapping("/update")
+	@PostMapping("/member/update")
 	public ResponseEntity<Void> memberUpdate(@Valid @ModelAttribute MemberUpdateParam param, BindingResult bindingResult){
 
 		if(bindingResult.hasErrors()){
@@ -86,7 +86,7 @@ public class MemberController {
 
 	}
 
-	@PostMapping("/delete")
+	@PostMapping("/member/delete")
 	public ResponseEntity<Void> memberDelete(Member member){
 
 		if(member !=null) {

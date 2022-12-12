@@ -26,18 +26,19 @@ public class Order {
     /* 주소 */
     private String address;
 
-
     /* 주문 상태 */
     private String orderState;
+
+    /* 사용 포인트 */
+    private int usePoint;
 
     /* 주문 상품 */
     private List<OrderItem> orderItems;
 
+    /*------------- 직접 작성 x -----------------*/
+
     /* 배송비 */
     private int deliveryCost;
-
-    /* 사용 포인트 */
-    private int usePoint;
 
     /* 주문 날짜 */
     private Date orderDate;

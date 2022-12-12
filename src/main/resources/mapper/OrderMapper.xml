@@ -7,7 +7,7 @@
 	<!-- 주문할 book에 대한 정보를 얻는다. -->
 	<select id="getBooksInfo" resultType="com.psh.mybook.model.order.OrderPageItem">
 
-		select bookId, bookName, price, discount
+		select bookId, bookName, bookPrice, bookDiscount
 		from book where bookId = #{bookId}
 
 	</select>
@@ -15,7 +15,7 @@
 	<!-- 주문 정보 -->
 	<select id="getOrderInfo" resultType="com.psh.mybook.model.order.OrderItem">
 
-		select bookId, price, discount
+		select bookId, bookPrice, bookDiscount
 		from book where bookId = #{bookId}
 
 	</select>
@@ -46,7 +46,7 @@
 	<!-- 주문 재고 차감 -->
 	<update id="reduceStock">
 
-		update book set quantity = #{quantity} where bookId = #{bookId}
+		update book set bookCount = #{bookCount} where bookId = #{bookId}
 
 	</update>
 

@@ -24,7 +24,7 @@
 	<select id="getCart" resultType="com.psh.mybook.model.cart.Cart">
 
 		select a.cartId, a.memberId, a.bookId, a.bookCount,
-		       b.bookName, b.price, b.discount
+		       b.bookName, b.bookPrice, b.bookDiscount
 		from cart a left outer join book b on a.bookId = b.bookId
 		where memberId = #{memberId}
 

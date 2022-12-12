@@ -4,7 +4,6 @@ package com.psh.mybook.service;
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.book.Book;
 import com.psh.mybook.model.book.BookEnrollParam;
-import com.psh.mybook.model.book.BookInfo;
 import com.psh.mybook.model.book.BookUpdateParam;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface BookService {
     public boolean isExistBookId(int bookId);
 
     /* 상품 조회 */
-    public BookInfo bookGet(int bookId);
+    public Book getBookInfo(int bookId);
 
     /* 책 업데이트 */
     public void bookUpdate(BookUpdateParam bookUpdateParam);

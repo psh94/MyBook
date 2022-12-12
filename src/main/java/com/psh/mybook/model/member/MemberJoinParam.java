@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -20,7 +21,7 @@ public class MemberJoinParam {
 	@NotBlank(message = "이름를 입력하시오.")
 	private String name;
 
-	@NotBlank(message = "이메일를 입력하시오.")
+	@Email(message = "이메일를 입력하시오.")
 	private String email;
 
 	@NotBlank(message = "주소를 입력하시오.")

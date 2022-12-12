@@ -16,8 +16,8 @@
 
 		</selectKey>
 
-		insert into book(bookname, author, isbn, price, discount, quantity)
-  		values(#{bookName}, #{author}, #{isbn}, #{price}, #{discount}, #{quantity})
+		insert into book(bookname, author, isbn, bookPrice, bookDiscount, bookCount)
+  		values(#{bookName}, #{author}, #{isbn}, #{bookPrice}, #{bookDiscount}, #{bookCount})
   	</insert>
 
 	<!-- 책 등록 중복검사 -->
@@ -27,12 +27,12 @@
 	</select>
 
 	<!-- 책 정보 조회	-->
-	<select id="bookGet" resultType="com.psh.mybook.model.book.BookInfo">
-		select bookName, author, isbn, price, discount from book where bookId = #{bookId}
+	<select id="getBooksInfo" resultType="com.psh.mybook.model.book.Book">
+		select * from book where bookId = #{bookId}
 	</select>
 	<!-- 책 정보 업데이트	-->
 	<update id="bookUpdate">
-		update book set bookName = #{bookName}, author = #{author}, price=#{price}, quantity = #{quantity}, discount=#{discount} where bookId = #{bookId}
+		update book set bookName = #{bookName}, author = #{author}, bookPrice=#{bookPrice}, bookCount = #{bookCount}, bookDiscount=#{bookDiscount} where bookId = #{bookId}
 	</update>
 
 	<!-- 책 등록 삭제	-->
@@ -58,7 +58,7 @@
 	<!-- 상품 검색 -->
 	<select id="getBookList" resultType="com.psh.mybook.model.book.Book">
 
-		select  bookId, bookName, author, isbn, price, quantity, discount
+		select  bookId, bookName, author, isbn, bookPrice, bookCount, bookDiscount
 		from book
 		<include refid="criteria"></include>
 		order by bookId

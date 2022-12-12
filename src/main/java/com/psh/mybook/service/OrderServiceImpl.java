@@ -77,15 +77,19 @@ public class OrderServiceImpl implements OrderService{
 
             OrderItem orderItemInfo = orderMapper.getOrderInfo(orderItem.getBookId());
 
+
             // 수량 셋팅
-            orderItemInfo.setBookCount(orderItemInfo.getBookCount());
+            orderItemInfo.setBookCount(orderItem.getBookCount());
 
             // 기본 정보 셋팅
             orderItemInfo.initSaleTotal();
 
             //List 객체 추가
             orderItemList.add(orderItemInfo);
+
+
         }
+
         /* Order 셋팅 */
         order.setOrderItems(orderItemList);
         order.getOrderPriceInfo();
@@ -96,12 +100,15 @@ public class OrderServiceImpl implements OrderService{
         //orderId의 형태는 "memberId_yyyyMMddmm"의 형태이다.
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("_yyyyMMddmm");
+
         String orderId = member.getMemberId() + format.format(date);
         order.setOrderId(orderId);
 
         /* db넣기 */
+        System.out.println(order.getOrderItems());
         orderMapper.enrollOrder(order);		// member_order 등록
         for(OrderItem orderItem : order.getOrderItems()) {		//orderItem 등록
+            System.out.println(orderItem);
             orderItem.setOrderId(orderId);
             orderMapper.enrollOrderItem(orderItem);
         }
@@ -127,7 +134,7 @@ public class OrderServiceImpl implements OrderService{
         for(OrderItem orderItem : order.getOrderItems()) {
             /* 변동 재고 값 구하기 */
             Book book = bookMapper.getBooksInfo(orderItem.getBookId());
-            book.setQuantity(book.getQuantity() - orderItem.getBookCount());
+            book.setBookCount(book.getBookCount() - orderItem.getBookCount());
             /* 변동 값 DB 적용 */
             orderMapper.reduceStock(book);
         }
@@ -158,6 +165,7 @@ public class OrderServiceImpl implements OrderService{
         for(OrderItem orderItem : orderItemList) {
             orderItem.initSaleTotal();
         }
+
         /* 주문 */
         Order orderWrapper = orderMapper.getOrder(orderCancel.getOrderId());
         orderWrapper.setOrderItems(orderItemList);
@@ -184,7 +192,7 @@ public class OrderServiceImpl implements OrderService{
         /* 재고 */
         for(OrderItem orderItem : orderWrapper.getOrderItems()) {
             Book book = bookMapper.getBooksInfo(orderItem.getBookId());
-            book.setQuantity(book.getQuantity() + orderItem.getBookCount());
+            book.setBookCount(book.getBookCount() + orderItem.getBookCount());
             orderMapper.reduceStock(book);
         }
 

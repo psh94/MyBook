@@ -115,7 +115,7 @@ public class MemberController {
 
 	}
 
-	@GetMapping("/members")
+	@GetMapping("/members/{memberId}")
 	public ResponseEntity<Void> getMember(@PathVariable String memberId){
 		memberService.getMemberInfo(memberId);
 		return RESPONSE_OK;

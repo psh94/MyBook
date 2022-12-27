@@ -7,6 +7,7 @@ import com.psh.mybook.model.cart.Cart;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.model.order.Order;
 import com.psh.mybook.model.order.OrderItem;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,8 +26,8 @@ public class OrderServiceTests {
     @InjectMocks
     OrderServiceImpl orderService;
 
-    /* 상품 정보(주문 처리) */
     @Test
+    @DisplayName("상품 정보")
     public void getOrderInfoTest() {
 
         OrderItem orderInfo = orderMapper.getOrderInfo(3);
@@ -34,8 +35,8 @@ public class OrderServiceTests {
         System.out.println("result : " + orderInfo);
     }
 
-    /* member_order 테이블 등록 */
     @Test
+    @DisplayName("member_order 테이블 등록")
     public void enrollOrderTest() {
 
         Order ord = new Order();
@@ -65,8 +66,8 @@ public class OrderServiceTests {
 
     }
 
-    /* vam_itemorder 테이블 등록 */
     @Test
+    @DisplayName("itemOrder테이블 등록")
     public void enrollOrderItemTest() {
 
         OrderItem oid = new OrderItem();
@@ -83,8 +84,8 @@ public class OrderServiceTests {
 
     }
 
-    /* 회원 돈, 포인트 정보 변경 */
     @Test
+    @DisplayName("돈, 포인트 정보 변경")
     public void deductMoneyTest() {
 
         Member member = new Member();
@@ -96,8 +97,8 @@ public class OrderServiceTests {
         orderMapper.reduceMoney(member);
     }
 
-    /* 상품 재고 변경 */
     @Test
+    @DisplayName("상품 재고 변경")
     public void deductStockTest() {
         Book book = new Book();
 
@@ -107,8 +108,8 @@ public class OrderServiceTests {
         orderMapper.reduceStock(book);
     }
 
-    /* 장바구니 제거(주문 처리) */
     @Test
+    @DisplayName("장바구니 제거(주문 후 처리)")
     public void deleteOrderCart() {
         String memberId = "test2";
         int bookId = 3201;

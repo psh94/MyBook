@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
 
 
-	//로그인이 제대로 되지 않았을 경우 다시 /member/login으로 돌아가는 interceptor
+	//로그인이 제대로 되지 않았을 경우 다시 /login으로 돌아가는 interceptor
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -21,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 
 		if(session == null || session.getAttribute(SessionConst.LOGIN_MEMBER)==null){
-			response.sendRedirect("/member/login");
+			response.sendRedirect("/login?redirectURL=" + requestURI);
 			return false;
 		}
 

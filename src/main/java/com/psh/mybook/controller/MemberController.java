@@ -31,8 +31,6 @@ public class MemberController {
 	private final LoginService loginService;
 
 
-
-
 	//회원가입
 	@PostMapping("/join")
 	public ResponseEntity<Void> join(@Valid MemberJoinParam param, BindingResult bindingResult) throws Exception{
@@ -54,7 +52,6 @@ public class MemberController {
 	}
 
 	@PostMapping("/join/memberIdChk")
-	@ResponseBody
 	public ResponseEntity<Void> memberChkId(String memberId){
 
 		boolean existMemberId = memberService.isExistMemberId(memberId);
@@ -69,7 +66,7 @@ public class MemberController {
 
 	/* 로그인 */
 	@PostMapping("/login")
-	public ResponseEntity<Void> loginPOST(@Valid MemberLoginParam param, BindingResult bindingResult, HttpServletRequest request) throws Exception {
+	public ResponseEntity<Void> login(@Valid MemberLoginParam param, BindingResult bindingResult, HttpServletRequest request) throws Exception {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -129,8 +126,6 @@ public class MemberController {
 
 		return RESPONSE_OK;
 	}
-
-
 
 	@PutMapping("/members/update")
 	public ResponseEntity<Void> memberUpdate(@Valid MemberUpdateParam param, BindingResult bindingResult){

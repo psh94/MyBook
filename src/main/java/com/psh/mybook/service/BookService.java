@@ -11,7 +11,7 @@ import java.util.List;
 public interface BookService {
 
     /* 상품 등록 */
-    public void bookEnroll(BookEnrollParam bookEnrollParam);
+    public void enrollBook(BookEnrollParam bookEnrollParam);
 
     /* 책 등록 중복 검사 */
     public boolean isExistBookId(int bookId);

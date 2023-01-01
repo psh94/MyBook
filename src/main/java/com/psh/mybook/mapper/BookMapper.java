@@ -12,7 +12,7 @@ import java.util.List;
 public interface BookMapper {
 
 	/* 책 등록 */
-	public void bookEnroll(BookEnrollParam bookEnrollParam);
+	public void enrollBook(BookEnrollParam bookEnrollParam);
 
 	/* 책 등록 중복 검사 */
 	public boolean isExistBookId(int bookId);

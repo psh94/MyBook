@@ -73,7 +73,7 @@ public class BookServiceTests {
 
     @Test
     @DisplayName("책 등록 성공")
-    public void bookEnrollTest(){
+    public void enrollBookTest(){
 
         BookEnrollParam book2 = new BookEnrollParam();
         book2.setBookName("연금술사");
@@ -84,9 +84,9 @@ public class BookServiceTests {
 
         assertThat(book2.getIsbn()).isNotEqualTo(book.getIsbn());
 
-        bookService.bookEnroll(book2);
+        bookService.enrollBook(book2);
 
-        verify(bookMapper).bookEnroll(book2);
+        verify(bookMapper).enrollBook(book2);
     }
 
 
@@ -146,12 +146,12 @@ public class BookServiceTests {
 
     @Test
     @DisplayName("책 등록 (이미지 추가)")
-    public void bookEnrollTestWithImage() {
+    public void enrollBookTestWithImage() {
 
-        // bookEnroll() 메서드 호출
-        bookService.bookEnroll(book);
+        // enrollBook() 메서드 호출
+        bookService.enrollBook(book);
 
-        verify(bookMapper).bookEnroll(book);
+        verify(bookMapper).enrollBook(book);
 
     }
 

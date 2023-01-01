@@ -21,10 +21,11 @@ public class BookServiceImpl implements BookService{
     private final ImageMapper imageMapper;
 
     // Transactional을 한 이유? 사진 한 장이 아닌 여러장을 받을 수 있기 때문에
+    // 전체 성공 or 전체 실패
     @Transactional
     @Override
-    public void bookEnroll(BookEnrollParam bookEnrollParam) {
-        bookMapper.bookEnroll(bookEnrollParam);
+    public void enrollBook(BookEnrollParam bookEnrollParam) {
+        bookMapper.enrollBook(bookEnrollParam);
 
         /* 이미지 등록 로직 */
         if(bookEnrollParam.getImageList() == null || bookEnrollParam.getImageList().size() <= 0) {
@@ -47,16 +48,18 @@ public class BookServiceImpl implements BookService{
     @Override
     public Book getBookInfo(int bookId) {
 
-            Book book = bookMapper.getBooksInfo(bookId);
-            book.setImageList(imageMapper.getAttachInfo(bookId));
+        //book에 Image 붙여서 반환
+        Book book = bookMapper.getBooksInfo(bookId);
+        book.setImageList(imageMapper.getAttachInfo(bookId));
 
-            return book;
+        return book;
     }
 
     @Transactional
     @Override
     public void bookUpdate(BookUpdateParam param) {
 
+        // 이미지 존재 o
         if(param.getImageList() !=null && param.getImageList().size()>0){
 
             // 이미지 삭제

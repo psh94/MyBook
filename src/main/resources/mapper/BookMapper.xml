@@ -5,7 +5,7 @@
   <mapper namespace="com.psh.mybook.mapper.BookMapper">
   
 	<!-- 책 등록 -->
-  	<insert id="bookEnroll">
+  	<insert id="enrollBook">
 
 		<!-- insert 문이 실행된 후에 selectKey 실행
 		쿼리문의 결과값이 Book의 bookId에 int 타입으로 반환된다.

@@ -37,7 +37,7 @@ public class BookController {
 
     // 책 등록
     @PostMapping
-    public ResponseEntity<Void> bookEnroll(@Valid BookEnrollParam bookEnrollParam, BindingResult bindingResult){
+    public ResponseEntity<Void> enrollBook(@Valid BookEnrollParam bookEnrollParam, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return RESPONSE_BAD_REQUEST;
@@ -49,7 +49,7 @@ public class BookController {
         if(existedBook) {
             return RESPONSE_CONFLICT;
         } else {
-            bookService.bookEnroll(bookEnrollParam);
+            bookService.enrollBook(bookEnrollParam);
             return RESPONSE_OK;
         }
     }

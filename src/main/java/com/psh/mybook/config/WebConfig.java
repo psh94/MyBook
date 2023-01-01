@@ -28,5 +28,10 @@ public class WebConfig implements WebMvcConfigurer {
 //                .order(2)
 //                .addPathPatterns()
 //                .excludePathPatterns();
+//
+//        registry.addInterceptor(new CartInterceptor())
+//                .order(3)
+//                .addPathPatterns()
+//                .excludePathPatterns();
 //    }
 }

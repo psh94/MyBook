@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +23,12 @@ import static com.psh.mybook.utill.HttpResponses.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/members")
 public class MemberController {
 
 	private final MemberService memberService;
 
 	private final LoginService loginService;
-
 
 	//회원가입
 	@PostMapping("/join")
@@ -39,28 +38,20 @@ public class MemberController {
 			return RESPONSE_BAD_REQUEST;
 		}
 
-		try {
+		memberService.memberJoin(param);
+		return RESPONSE_CREATED;
 
-			memberService.memberJoin(param);
-			return RESPONSE_OK;
-
-		} catch (Exception e){
-
-			return RESPONSE_CONFLICT;
-
-		}
 	}
 
-	@PostMapping("/join/memberIdChk")
-	public ResponseEntity<Void> memberChkId(String memberId){
+	@PostMapping("/{memberId}/exists")
+	public ResponseEntity<Void> memberChkId(@PathVariable String memberId){
 
-		boolean existMemberId = memberService.isExistMemberId(memberId);
-
-		if (existMemberId){
-			return RESPONSE_BAD_REQUEST;
+		if(!memberService.isExistMemberId(memberId)){
+			return RESPONSE_OK;
+		} else {
+			return RESPONSE_CONFLICT;
 		}
 
-		return RESPONSE_OK;
 
 	}
 
@@ -112,22 +103,14 @@ public class MemberController {
 
 	}
 
-	@GetMapping("/members/{memberId}")
-	public ResponseEntity<Void> getMember(@PathVariable String memberId){
+	@GetMapping("/my-account")
+	public ResponseEntity<Void> getMember(String memberId){
 		memberService.getMemberInfo(memberId);
 		return RESPONSE_OK;
 	}
 
-	@GetMapping("/members/update")
-	public ResponseEntity<Void> memberUpdate(String memberId, Model model){
-		model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
 
-		log.info("회원 업데이트 페이지");
-
-		return RESPONSE_OK;
-	}
-
-	@PutMapping("/members/update")
+	@PutMapping("/my-account")
 	public ResponseEntity<Void> memberUpdate(@Valid MemberUpdateParam param, BindingResult bindingResult){
 
 		if(bindingResult.hasErrors()){
@@ -139,7 +122,7 @@ public class MemberController {
 
 	}
 
-	@DeleteMapping("/members/delete")
+	@DeleteMapping("/my-account")
 	public ResponseEntity<Void> memberDelete(Member member){
 
 		if(member !=null) {

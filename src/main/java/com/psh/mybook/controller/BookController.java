@@ -2,7 +2,10 @@ package com.psh.mybook.controller;
 
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.Page;
-import com.psh.mybook.model.book.*;
+import com.psh.mybook.model.book.AttachImage;
+import com.psh.mybook.model.book.Book;
+import com.psh.mybook.model.book.BookEnrollParam;
+import com.psh.mybook.model.book.BookUpdateParam;
 import com.psh.mybook.service.BookService;
 import com.psh.mybook.service.ImageService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +36,8 @@ public class BookController {
 
 
     // 책 등록
-    @PostMapping("/enroll")
-    public ResponseEntity<Void> bookEnroll(@Valid @ModelAttribute BookEnrollParam bookEnrollParam, BindingResult bindingResult){
+    @PostMapping
+    public ResponseEntity<Void> bookEnroll(@Valid BookEnrollParam bookEnrollParam, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             return RESPONSE_BAD_REQUEST;
@@ -52,18 +55,18 @@ public class BookController {
     }
 
     // 책 조회
-    @GetMapping("/")
-    public Book bookDetail(int bookId, Model model){
+    @GetMapping("/{bookId}")
+    public Book bookDetail(@PathVariable int bookId, Model model){
         model.addAttribute("bookInfo", bookService.getBookInfo(bookId));
-       return bookService.getBookInfo(bookId);
+        return bookService.getBookInfo(bookId);
     }
 
 
 
     // 책 업데이트
-    @PutMapping("/update")
-    public ResponseEntity<Void> bookUpdate(@Valid @ModelAttribute BookUpdateParam param){
-        boolean existedBook = bookService.isExistBookId(param.getBookId());
+    @PutMapping("/{bookId}")
+    public ResponseEntity<Void> bookUpdate(@PathVariable String bookId, @Valid BookUpdateParam bookUpdateParam){
+        boolean existedBook = bookService.isExistBookId(bookUpdateParam.getBookId());
 
         if(!existedBook) {
 
@@ -71,7 +74,7 @@ public class BookController {
 
         } else{
 
-            bookService.bookUpdate(param);
+            bookService.bookUpdate(bookUpdateParam);
             return RESPONSE_OK;
 
         }
@@ -82,13 +85,11 @@ public class BookController {
     // image 테이블은 book 테이블의 bookId를 외래키로 받기 때문에 book 테이블의 데이터가 사라지면 에러가 발생한다.
     // 그렇기 때문에 bookId를 갖고 있는 book의 데이터를 지우기에 앞서 image 데이터를 먼저 지워야 한다.
     // 책 삭제
-    @PostMapping("/delete")
-    public ResponseEntity<Void> bookDelete(@Valid Book book){
+    @PostMapping("/{bookId}")
+    public ResponseEntity<Void> bookDelete(@PathVariable String bookId, @Valid Book book){
 
         //이미지 정보를 먼저 지워준다.
         List<AttachImage> fileList = imageService.getAttachInfo(book.getBookId());
-        System.out.println(imageService);
-        System.out.println(fileList);
 
         if(fileList != null) {
 
@@ -112,9 +113,6 @@ public class BookController {
         } else {
 
         }
-
-        System.out.println(book);
-
 
         // 상품을 제거한다.
         if(book.getBookId() != 0){

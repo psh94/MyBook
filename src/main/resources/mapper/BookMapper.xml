@@ -55,7 +55,7 @@
 		</if>
 	</sql>
 
-	<!-- 상품 검색 -->
+	<!-- 상품 검색 (+페이징) -->
 	<select id="getBookList" resultType="com.psh.mybook.model.book.Book">
 
 		select  bookId, bookName, author, isbn, bookPrice, bookCount, bookDiscount

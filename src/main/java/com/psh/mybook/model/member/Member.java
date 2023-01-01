@@ -16,8 +16,10 @@ public class Member {
 	private String name;
 	
 	private String email;
-	
+
 	private String address;
+
+
 
 	// 관리자 구분 키 (0은 일반 고객, 1은 관리자)
 	private int adminCk;

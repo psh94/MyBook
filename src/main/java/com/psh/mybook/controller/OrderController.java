@@ -35,18 +35,18 @@ public class OrderController {
     private final LoginService loginService;
 
 
-    // 책, 회원 정보를 보여준다.
-    @GetMapping("/{memberId}")
-    public String orderPage(@PathVariable String memberId, OrderPage orderPage, Model model) {
+    // 책, 회원 정보를 보여준다. (주문정보 확인)
+    @GetMapping
+    public ResponseEntity<Void> orderPage(String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
         model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
 
-        return "/orders";
+        return RESPONSE_OK;
 
     }
 
-    @PostMapping("/")
+    @PostMapping("/enroll")
     public ResponseEntity<Void> orderPage(Order order, HttpServletRequest request){
 
         orderService.order(order);
@@ -85,8 +85,7 @@ public class OrderController {
 
 
 
-    /* 주문 현황 페이지 */
-    // admin이 주문 현황을 확인
+    /* 주문 확인 페이지 */
     @GetMapping("/list")
     public ResponseEntity<Void> orderList(Criteria cri, Model model) {
 

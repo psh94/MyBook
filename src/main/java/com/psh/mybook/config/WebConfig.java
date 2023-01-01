@@ -25,12 +25,12 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/join", "/login", "/logout", "/main", "/join/memberIdChk");
+                .addPathPatterns()
+                .excludePathPatterns();
 
         registry.addInterceptor(new AdminInterceptor())
                 .order(2)
-                .addPathPatterns("/book/**")
-                .excludePathPatterns("/book/detail/{bookId}");
+                .addPathPatterns()
+                .excludePathPatterns();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
@@ -14,15 +15,16 @@ import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 
 @RestController
 @Slf4j
+@RequestMapping("/home")
 public class HomeController {
 
-	@GetMapping("/main")
+	@GetMapping
 	public ResponseEntity<Void> home(){
 		return RESPONSE_OK;
 	}
 
 
-	@PostMapping("/main")
+	@PostMapping
 	public ResponseEntity<Void> homeLogin(@Login MemberLoginParam loginMember, Model model) {
 
 		// session에 loginMember가 없을 때,

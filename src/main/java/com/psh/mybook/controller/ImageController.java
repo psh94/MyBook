@@ -49,11 +49,8 @@ public class ImageController {
             String type = null;
 
             try {
-
                 // probeContentType : MIME TYPE을 반환해준다.
-                // MIME TYPE : 파일이 어떤 종류의 파일인지에 대한 정보가 담긴 라벨이다.
                 type = Files.probeContentType(checkfile.toPath());
-                log.info("MIME TYPE : " + type);
 
             } catch (IOException e) {
 
@@ -89,7 +86,7 @@ public class ImageController {
         /* 폴더 생성 */
         File uploadPath = new File(uploadFolder, datePath);
 
-        // 업로드 경로(uploadPath)가 존재하지 않으면
+        // 업로드 경로(uploadPath)가 존재하지 않으면 폴더 생성(mkdirs)
         if (!uploadPath.exists()) {
             uploadPath.mkdirs();
         }
@@ -110,6 +107,7 @@ public class ImageController {
             String uuid = UUID.randomUUID().toString();
             attachImage.setUuid(uuid);
 
+            /* 새로운 uploadFileName */
             uploadFileName = uuid + "_" + uploadFileName;
 
             /* 파일 위치, 파일 이름을 합친 File 객체 */

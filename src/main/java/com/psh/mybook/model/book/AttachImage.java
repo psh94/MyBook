@@ -11,6 +11,10 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class AttachImage {
 
+    /* 상품 id */
+    @NotNull
+    private int bookId;
+
     /* 경로 */
     @NotNull
     private String uploadPath;
@@ -23,7 +27,5 @@ public class AttachImage {
     @NotNull
     private String fileName;
 
-    /* 상품 id */
-    @NotNull
-    private int bookId;
+
 }

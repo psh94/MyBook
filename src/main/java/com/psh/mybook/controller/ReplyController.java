@@ -5,7 +5,6 @@ import com.psh.mybook.model.reply.Reply;
 import com.psh.mybook.model.reply.ReplyEnrollParam;
 import com.psh.mybook.model.reply.ReplyPage;
 import com.psh.mybook.model.reply.ReplyUpdateParam;
-import com.psh.mybook.service.BookService;
 import com.psh.mybook.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +21,6 @@ import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 public class ReplyController {
 
     private final ReplyService replyService;
-
-    private final BookService bookService;
 
     /* 댓글 등록 */
     @PostMapping("/enroll")
@@ -43,22 +40,22 @@ public class ReplyController {
     }
 
     /* 댓글 조회, 페이징 */
-    @GetMapping("/list")
-    public ResponseEntity<ReplyPage> replyList(Criteria cri) {
+    @GetMapping("/{replyId}")
+    public ResponseEntity<ReplyPage> replyList(@PathVariable int replyId, Criteria cri) {
         replyService.replyList(cri);
         return RESPONSE_OK;
     }
 
     /* 댓글 수정 */
-    @PutMapping("/update")
-    public ResponseEntity<Void> replyModifyPOST(ReplyUpdateParam param) {
+    @PutMapping("/{replyId}")
+    public ResponseEntity<Void> replyModifyPOST(@PathVariable int replyId, ReplyUpdateParam param) {
         replyService.updateReply(param);
         return RESPONSE_OK;
     }
 
     /* 댓글 삭제 */
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> replyDelete(Reply reply) {
+    @DeleteMapping("/{replyId}")
+    public ResponseEntity<Void> replyDelete(@PathVariable int replyId, Reply reply) {
         replyService.deleteReply(reply);
         return RESPONSE_OK;
     }

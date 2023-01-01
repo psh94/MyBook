@@ -27,6 +27,7 @@ public class MemberJoinParam {
 	@NotBlank(message = "주소를 입력하시오.")
 	private String address;
 
+
 	// 관리자 구분 키 (0은 일반 고객, 1은 관리자)
 	private int adminCk;
 

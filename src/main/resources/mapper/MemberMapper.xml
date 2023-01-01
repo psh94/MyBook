@@ -7,7 +7,7 @@
 	<!-- 회원가입 -->  
   	<insert id="memberJoin">
   		insert into member
-  		values(#{memberId}, #{password}, #{name}, #{email}, #{address}, 0, sysdate(), 100000, 5000)
+  		values(#{memberId}, #{password}, #{name}, #{email}, #{address}, 0, now(), 100000, 5000)
   	</insert>
   	
   	<!-- 아이디 중복검사 -->

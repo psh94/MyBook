@@ -16,22 +16,17 @@ import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/cart")
+@RequestMapping("/carts")
 public class CartController {
 
     private final CartService cartService;
 
-    @PostMapping("/add")
+    @PostMapping
     public int addCart(Cart cart, HttpServletRequest request) {
 
         // 로그인 체크
         HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
-
-        System.out.println(request);
-        System.out.println(session);
-        System.out.println(session.getAttribute(SessionConst.LOGIN_MEMBER));
-        System.out.println(member);
 
         // 멤버가 null 이면 5를 반환
         if(member == null) {
@@ -43,14 +38,14 @@ public class CartController {
     }
 
 
-    @GetMapping("/{memberId}")
-    public ResponseEntity<Void> cartPage(@PathVariable @ModelAttribute String memberId, Model model) {
+    @GetMapping("/{cartId}")
+    public ResponseEntity<Void> cartPage(@PathVariable String cartId, Model model) {
         return RESPONSE_OK;
     }
 
 
-    @PutMapping("/update")
-    public ResponseEntity<Void> updateCart(Cart cart) {
+    @PutMapping("/{cartId}")
+    public ResponseEntity<Void> updateCart(@PathVariable String cartId, Cart cart) {
 
         cartService.modifyCount(cart);
 
@@ -58,8 +53,8 @@ public class CartController {
 
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteCart(Cart cart) {
+    @DeleteMapping("/{cartId}")
+    public ResponseEntity<Void> deleteCart(@PathVariable String cartId, Cart cart) {
 
         cartService.deleteCart(cart.getCartId());
 

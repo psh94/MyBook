@@ -16,4 +16,17 @@ public class WebConfig implements WebMvcConfigurer {
         resolvers.add(new LoginMemberArgumentResolver());
 
     }
+
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoginInterceptor())
+//                .order(1)
+//                .addPathPatterns()
+//                .excludePathPatterns();
+//
+//        registry.addInterceptor(new AdminInterceptor())
+//                .order(2)
+//                .addPathPatterns()
+//                .excludePathPatterns();
+//    }
 }

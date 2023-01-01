@@ -49,7 +49,7 @@ public class OrderController {
     @PostMapping("/enroll")
     public ResponseEntity<Void> orderPage(Order order, HttpServletRequest request){
 
-        orderService.order(order);
+        orderService.enrollOrder(order);
 
         MemberLoginParam member = new MemberLoginParam();
         member.setMemberId(order.getMemberId());

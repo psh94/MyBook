@@ -56,7 +56,7 @@ public class ReplyController {
     /* 댓글 삭제 */
     @DeleteMapping("/{replyId}")
     public ResponseEntity<Void> replyDelete(@PathVariable int replyId, Reply reply) {
-        replyService.deleteReply(reply);
+        replyService.deleteReply(replyId);
         return RESPONSE_OK;
     }
 }

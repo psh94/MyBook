@@ -2,7 +2,6 @@ package com.psh.mybook.service;
 
 
 import com.psh.mybook.mapper.CartMapper;
-import com.psh.mybook.mapper.ImageMapper;
 import com.psh.mybook.model.cart.Cart;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,41 +13,39 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
+
 @ExtendWith({MockitoExtension.class})
 public class CartServiceTests {
 
     @Mock
     CartMapper cartMapper;
 
-    @Mock
-    ImageMapper imageMapper;
-
     @InjectMocks
     CartServiceImpl cartService;
-
-    @InjectMocks
-    ImageServiceImpl imageService;
 
     Cart cart;
 
     @BeforeEach
     void setUp(){
-        Cart cart = new Cart();
+
+        cart = new Cart();
         cart.setBookId(2);
         cart.setBookCount(3);
         cart.setMemberId("test3");
-        cart.setBookDiscount(20);
+        cart.setBookDiscount(0.3);
 
     }
 
 
     @Test
     @DisplayName("장바구니 추가")
-    public void addCartTest() {
+    public void addCartTest() throws Exception {
 
-        int result = cartService.addCart(cart);
+        cartService.addCart(cart);
 
-        System.out.println("result : " + result);
+        verify(cartMapper).addCart(cart);
+
 
     }
 
@@ -58,9 +55,12 @@ public class CartServiceTests {
     @Test
     @DisplayName("장바구니 제거")
     public void deleteCartTest() {
-        int cartId = 5;
 
-        cartService.deleteCart(cartId);
+        cartService.deleteCart(cart.getCartId());
+
+        verify(cartMapper).deleteCart(cart.getCartId());
+
+
 
     }
 
@@ -69,7 +69,7 @@ public class CartServiceTests {
     @Test
     @DisplayName("장바구니 수량 수정")
     public void modifyCartTest() {
-        int cartId = 3;
+        int cartId = 1;
         int count = 5;
 
         cart = new Cart();
@@ -77,6 +77,8 @@ public class CartServiceTests {
         cart.setBookCount(count);
 
         cartService.modifyCount(cart);
+
+        verify(cartMapper).modifyCount(cart);
 
     }
 
@@ -88,13 +90,13 @@ public class CartServiceTests {
     public void getCartTest() {
         String memberId = "test3";
 
-
         List<Cart> list = cartService.getCart(memberId);
         for(Cart cart : list) {
             System.out.println(cart);
             cart.initSaleTotal();
             System.out.println("init cart : " + cart);
         }
+
     }
 
 

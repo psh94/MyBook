@@ -1,7 +1,6 @@
 package com.psh.mybook.service;
 
 import com.psh.mybook.model.Criteria;
-import com.psh.mybook.model.reply.Reply;
 import com.psh.mybook.model.reply.ReplyEnrollParam;
 import com.psh.mybook.model.reply.ReplyPage;
 import com.psh.mybook.model.reply.ReplyUpdateParam;
@@ -19,5 +18,5 @@ public interface ReplyService {
 
 
     /* 댓글 삭제 */
-    public int deleteReply(Reply dto);
+    public int deleteReply(int replyId);
 }

@@ -3,7 +3,6 @@ package com.psh.mybook.service;
 import com.psh.mybook.mapper.ReplyMapper;
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.Page;
-import com.psh.mybook.model.reply.Reply;
 import com.psh.mybook.model.reply.ReplyEnrollParam;
 import com.psh.mybook.model.reply.ReplyPage;
 import com.psh.mybook.model.reply.ReplyUpdateParam;
@@ -43,8 +42,8 @@ public class ReplyServiceImpl implements ReplyService{
 
 
     @Override
-    public int deleteReply(Reply dto) {
+    public int deleteReply(int replyId) {
 
-        return replyMapper.deleteReply(dto.getReplyId());
+        return replyMapper.deleteReply(replyId);
     }
 }

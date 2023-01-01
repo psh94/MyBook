@@ -14,7 +14,7 @@ public interface OrderService {
     public List<OrderPageItem> getBooksInfo(List<OrderPageItem> orders);
 
     /* 주문 처리 */
-    public void order(Order order);
+    public void enrollOrder(Order order);
 
     /* 주문 상품 리스트 */
     public List<Order> getOrderList(Criteria cri);

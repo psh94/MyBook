@@ -63,14 +63,12 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public void order(Order order) {
-
+    public void enrollOrder(Order order) {
 
         /* 회원 정보 가져오기 */
         Member member = memberMapper.getMemberInfo(order.getMemberId());
 
         /* 주문 정보 */
-        //
         List<OrderItem> orderItemList = new ArrayList<>();
 
         for(OrderItem orderItem : order.getOrderItems()) {

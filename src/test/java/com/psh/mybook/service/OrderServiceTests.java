@@ -37,7 +37,7 @@ public class OrderServiceTests {
 
     @Test
     @DisplayName("member_order 테이블 등록")
-    public void enrollOrderTest() {
+    void enrollOrderTest() {
 
         Order ord = new Order();
         List<OrderItem> orders = new ArrayList();
@@ -67,7 +67,7 @@ public class OrderServiceTests {
     }
 
     @Test
-    @DisplayName("itemOrder테이블 등록")
+    @DisplayName("itemOrder 테이블 등록")
     public void enrollOrderItemTest() {
 
         OrderItem oid = new OrderItem();

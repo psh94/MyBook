@@ -77,7 +77,7 @@ public class ImageController {
         String uploadFolder = "C:\\upload";
 
 
-        // C:\upload의 하위 폴더로 yyyy/MM/dd의 이름을 가진 폴더를 생성하자.
+        // C:\\upload의 하위 폴더로 yyyy/MM/dd의 이름을 가진 폴더를 생성하자.
 
         /* 날짜 폴더 경로 */
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -91,7 +91,7 @@ public class ImageController {
 
 
         /* 폴더 생성 */
-        // c:\upload\yyyy\MM\dd 경로를 생성한다.
+        // c:\\upload\yyyy\MM\dd 경로를 생성한다.
         File uploadPath = new File(uploadFolder, datePath);
 
         // 업로드 경로(uploadPath)가 존재하지 않으면 폴더 생성(mkdirs, mkdir은 단일 폴더 생성)

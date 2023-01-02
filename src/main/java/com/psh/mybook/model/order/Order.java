@@ -12,7 +12,14 @@ import java.util.List;
 @ToString
 public class Order {
 
-    //'배송지 정보', '사용 포인트 정보', 여러 개의 주문 상품 정보를 담는다.
+    /*
+    Order : OrderPage에서 주문하기를 눌렀을 때 DB로 넘어가는 객체
+    OrderItem : Order에 들어가는 주문 아이템 하나
+
+    OrderPage : 상품 상세 페이지나 장바구니에서 주문하기를 눌렀을 때 OrderPage view를 구성하는 객체
+    OrderPageItem : OrderPage를 구성하는 아이템 하나
+     */
+
 
     /* 주문 번호 */
     private String orderId;

@@ -130,6 +130,7 @@ public class BookController {
     public ResponseEntity<Void> searchBook(Criteria cri, Model model){
 
         List<Book> list = bookService.getBookList(cri);
+
         if(!list.isEmpty()){
 
             model.addAttribute("list",list);
@@ -137,7 +138,7 @@ public class BookController {
         }else {
 
             model.addAttribute("listcheck", "empty");
-            return RESPONSE_CONFLICT;
+            return RESPONSE_BAD_REQUEST;
         }
 
         model.addAttribute("pageMaker", new Page(cri, bookService.getBookTotal(cri)));

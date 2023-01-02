@@ -1,5 +1,6 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.annotation.Login;
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.Page;
 import com.psh.mybook.model.member.Member;
@@ -35,9 +36,9 @@ public class OrderController {
     private final LoginService loginService;
 
 
-    // 책, 회원 정보를 보여준다. (주문정보 확인)
+    // 장바구니 or 상품 상세에서 주문하기를 클릭 했을때
     @GetMapping
-    public ResponseEntity<Void> orderPage(String memberId, OrderPage orderPage, Model model) {
+    public ResponseEntity<Void> orderPageGET(String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
         model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
@@ -46,21 +47,17 @@ public class OrderController {
 
     }
 
+    // order 페이지에서 주문하기를 눌렀을 때
     @PostMapping("/enroll")
-    public ResponseEntity<Void> orderPage(Order order, HttpServletRequest request){
+    public ResponseEntity<Void> orderPagePOST(@Login MemberLoginParam memberLoginParam, Order order, HttpServletRequest request){
 
         orderService.enrollOrder(order);
-
-        MemberLoginParam member = new MemberLoginParam();
-        member.setMemberId(order.getMemberId());
-        member.setPassword("");
-        System.out.println(member);
 
         HttpSession session = request.getSession();
 
         try {
-            System.out.println(member);
-            Member memberLogin = loginService.memberLogin(member);
+            System.out.println(memberLoginParam);
+            Member memberLogin = loginService.memberLogin(memberLoginParam);
             session.setAttribute(SessionConst.LOGIN_MEMBER, memberLogin);
 
         } catch (Exception e) {

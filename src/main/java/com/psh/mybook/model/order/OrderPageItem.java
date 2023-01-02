@@ -13,8 +13,6 @@ import java.util.List;
 @ToString
 public class OrderPageItem {
 
-    //OrderPageItem은 상품에 대한 정보를 담는다.
-
     /* View에서 오는 값*/
     @NotNull
     private int bookId;

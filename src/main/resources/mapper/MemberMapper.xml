@@ -25,6 +25,7 @@
 	<update id="memberUpdate" parameterType="com.psh.mybook.model.member.Member">
 		update member set password = #{password}, email = #{email}, address =#{address} where memberId = #{memberId}
 	</update>
+
 	<!-- 회원 삭제 -->
 	<delete id="memberDelete" parameterType="com.psh.mybook.model.member.Member">
 		delete from member where memberId = #{memberId}

@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @ToString
 public class OrderPage {
-    // OrderPageItem 객체를 요소로 가지는 List 타입의 변수를 갖는 클래스
 
     @NotNull
     private List<OrderPageItem> orders;

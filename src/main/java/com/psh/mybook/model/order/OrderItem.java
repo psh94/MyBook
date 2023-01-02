@@ -9,7 +9,6 @@ import lombok.ToString;
 @ToString
 public class OrderItem {
 
-    //OrderItem은 하나의 주문 상품 정보를 담는다.
 
     /* orderItem 기본키 */
     private int orderItemId;
@@ -34,9 +33,7 @@ public class OrderItem {
     private double bookDiscount;
 
     /* 상품 한개 구매 시 획득 포인트 */
-    private int savePoint;
-
-
+    private int point;
 
     // DB에는 올라가지 않는 데이터들
 
@@ -54,7 +51,7 @@ public class OrderItem {
     public void initSaleTotal() {
         this.salePrice = (int) (this.bookPrice * (1-this.bookDiscount));
         this.totalPrice = this.salePrice*this.bookCount;
-        this.savePoint = (int)(Math.floor(this.salePrice*0.05));
-        this.totalSavePoint =this.savePoint * this.bookCount;
+        this.point = (int)(Math.floor(this.salePrice*0.05));
+        this.totalSavePoint =this.point * this.bookCount;
     }
 }

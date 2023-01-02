@@ -11,7 +11,9 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class OrderPageItem { // 상품을 담을 클래스
+public class OrderPageItem {
+
+    //OrderPageItem은 상품에 대한 정보를 담는다.
 
     /* View에서 오는 값*/
     @NotNull

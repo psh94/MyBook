@@ -9,18 +9,23 @@ import lombok.ToString;
 @ToString
 public class OrderItem {
 
-    /* 주문 번호 */
-    private String orderId;
+    //OrderItem은 하나의 주문 상품 정보를 담는다.
 
     /* orderItem 기본키 */
     private int orderItemId;
 
+    /* 주문 번호 */
+    private String orderId;
+
     /* 상품 번호 */
     private int bookId;
 
+
+    /* 상품 이름 */
+    private String bookName;
+
     /* 주문 수량 */
     private int bookCount;
-
 
     /* 상품 한 개 가격 */
     private int bookPrice;

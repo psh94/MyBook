@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 public class Order {
 
-    //order를 post로 받아 주문을 생성한다.
+    //'배송지 정보', '사용 포인트 정보', 여러 개의 주문 상품 정보를 담는다.
 
     /* 주문 번호 */
     private String orderId;

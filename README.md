@@ -18,7 +18,9 @@
 https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
 ## ERD
-![erd](https://user-images.githubusercontent.com/84213252/210178334-f5588775-1474-4383-a64b-3a062dd32352.PNG)
+![erd](https://user-images.githubusercontent.com/84213252/210246182-77bdb0e8-6975-40ea-8e19-47d42755a806.PNG)
+
+
 
 ## Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case

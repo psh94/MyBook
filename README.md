@@ -1,17 +1,15 @@
 # MyBook
 - 교보문고를 모티브로 한 온라인 서점 서버 만들기 프로젝트 입니다.
+- 기존 온라인 서점의 서비스 구현을 목표로 진행했습니다.
 - 백엔드에 집중하기 위해 프론트엔드 대신 Kakao Oven으로 만든 UI로 대신합니다.
 
-## 사용 기술
-- Spring Boot 2.7.6
-- JAVA 11
-- MyBatis 2.3.0
-- MySQL
-- Gradle
-- Quartz
-- Spring Security(Crypto)
-- IntelliJ
-- Postman
+## 개요
+- 프로젝트 명 : MyBook
+- 개발 인원 : 1명
+- 개발 기간 : 2022.11.10 ~ (추가 진행중)
+- 개발 환경 : SpringBook 2.7.6, JDK 11, MyBatis 2.3.0, Gradle, Spring Security Crypto Junit5
+- 데이터베이스 : MySQL 8.0.30
+- 기타 : Postman
 
 ## Application UI
 

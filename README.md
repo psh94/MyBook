@@ -7,7 +7,7 @@
 - 프로젝트 명 : MyBook
 - 개발 인원 : 1명
 - 개발 기간 : 2022.11.10 ~ (추가 진행중)
-- 개발 환경 : SpringBook 2.7.6, JDK 11, MyBatis 2.3.0, Gradle, Spring Security Crypto Junit5
+- 개발 환경 : SpringBook 2.7.6, JDK 11, MyBatis 2.3.0, Gradle, Spring Security Crypto, Junit5
 - 데이터베이스 : MySQL 8.0.30
 - 기타 : Postman
 

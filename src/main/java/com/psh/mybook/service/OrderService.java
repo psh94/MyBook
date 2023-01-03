@@ -16,6 +16,9 @@ public interface OrderService {
     /* 주문 처리 */
     public void enrollOrder(Order order);
 
+    /* 주문 조회 */
+    public Order getOrder(String orderId);
+
     /* 주문 상품 리스트 */
     public List<Order> getOrderList(Criteria cri);
 

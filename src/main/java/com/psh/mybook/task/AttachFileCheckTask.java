@@ -2,8 +2,8 @@ package com.psh.mybook.task;
 
 import com.psh.mybook.mapper.ImageMapper;
 import com.psh.mybook.model.book.AttachImage;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +15,12 @@ import java.util.*;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class AttachFileCheckTask {
 
-    @Autowired
-    private ImageMapper imageMapper;
+    // 경로 상의 이미지와 같은 썸네일의 이미지가 서로 존재하는지 여부를 확인한다.
+
+    private final ImageMapper imageMapper;
 
     private String getFolderYesterDay() {
 

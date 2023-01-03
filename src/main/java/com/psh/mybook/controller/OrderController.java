@@ -69,6 +69,16 @@ public class OrderController {
         return RESPONSE_OK;
     }
 
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Void> getOrder(@PathVariable String orderId, Model model){
+
+        model.addAttribute("order",orderService.getOrder(orderId));
+
+        return RESPONSE_OK;
+
+
+    }
+
     /* 주문취소 */
     // 주문을 삭제하는 것이 아닌 주문 상태를 '주문취소'로 만든다.
     @PostMapping("/cancel")

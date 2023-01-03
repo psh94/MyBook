@@ -138,6 +138,11 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
+    @Override
+    public Order getOrder(String orderId) {
+        return orderMapper.getOrder(orderId);
+    }
+
     /* 주문 상품 리스트 */
     @Override
     public List<Order> getOrderList(Criteria cri) {

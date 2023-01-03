@@ -34,7 +34,6 @@ public class CartController {
         2 : 이미 데이터 존재
         3 : 비 로그인 상태
          */
-        // 멤버가 null 이면 5를 반환
         if(member == null) {
             return 3;
         }

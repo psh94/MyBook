@@ -11,6 +11,11 @@
 - 데이터베이스 : MySQL 8.0.30
 - 기타 : Postman
 
+## 📖 목표
+- 스프링 MVC 모델로 서버 구축하기
+- REST API 이해하고 적용하기
+- 
+
 ## 📖 Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case
 
@@ -25,3 +30,19 @@ https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
 ## 📖 URL
 ![url 정리](https://user-images.githubusercontent.com/84213252/210178344-99f2fb2f-9c1c-4de1-89be-53598e3d20c2.PNG)
+
+## 📖 참고 강의 및 자료
+#### 스프링 핵심원리 [기본편] : 김영한
+- https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B8%B0%EB%B3%B8%ED%8E%B8
+#### 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 : 김영한
+- https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1
+#### 스프링 MVC 2편 - 백엔드 웹 개발 활용 기술
+- https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-2
+
+#### 모든 개발자를 위한 HTTP 웹 기본 지식
+- https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC
+
+#### [Network] REST란? REST API란? RESTful이란? : gmlwjd9405.github.io
+- https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html
+#### 스프링 프레임워크 - 쇼핑몰 프로젝트 : kimvampa.tistory.com
+- https://kimvampa.tistory.com/category/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC/%EC%87%BC%ED%95%91%EB%AA%B0%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8

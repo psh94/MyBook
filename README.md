@@ -14,7 +14,6 @@
 ## 📖 목표
 - 스프링 MVC 모델로 서버 구축하기
 - REST API 이해하고 적용하기
-- 
 
 ## 📖 Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case

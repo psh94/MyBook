@@ -20,7 +20,7 @@ https://github.com/psh94/MyBook/wiki/Use-Case
 https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
 ## ERD
-![url 정리](https://user-images.githubusercontent.com/84213252/210503783-38952911-11d1-403b-8992-0ebde2456c84.PNG)
+![erd](https://user-images.githubusercontent.com/84213252/210503831-a9e561a7-5012-487a-977f-5a37a993880e.PNG)
 
 
 

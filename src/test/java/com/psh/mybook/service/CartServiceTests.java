@@ -97,6 +97,8 @@ public class CartServiceTests {
             System.out.println("init cart : " + cart);
         }
 
+        verify(cartMapper).getCart(memberId);
+
     }
 
 
@@ -115,6 +117,7 @@ public class CartServiceTests {
 
         Cart resutlCart = cartService.checkCart(cart);
         System.out.println("결과 : " + resutlCart);
+        verify(cartMapper).checkCart(cart);
 
     }
 

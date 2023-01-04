@@ -1,5 +1,6 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.annotation.LoginRequired;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.model.member.MemberJoinParam;
 import com.psh.mybook.model.member.MemberLoginParam;
@@ -93,6 +94,7 @@ public class MemberController {
 
 	// session을 제거해서 로그아웃
 	@GetMapping("/logout")
+	@LoginRequired
 	public ResponseEntity<Void> logout(HttpServletRequest request){
 
 		HttpSession session = request.getSession();
@@ -104,6 +106,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/my-account")
+	@LoginRequired
 	public ResponseEntity<Void> getMember(String memberId){
 		memberService.getMemberInfo(memberId);
 		return RESPONSE_OK;
@@ -111,6 +114,7 @@ public class MemberController {
 
 
 	@PutMapping("/my-account")
+	@LoginRequired
 	public ResponseEntity<Void> memberUpdate(@Valid MemberUpdateParam param, BindingResult bindingResult){
 
 		if(bindingResult.hasErrors()){
@@ -123,6 +127,7 @@ public class MemberController {
 	}
 
 	@DeleteMapping("/my-account")
+	@LoginRequired
 	public ResponseEntity<Void> memberDelete(Member member){
 
 		if(member !=null) {

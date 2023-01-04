@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.psh.mybook.utill.HttpResponses.RESPONSE_BAD_REQUEST;
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 
 
@@ -29,7 +30,7 @@ public class HomeController {
 
 		// session에 loginMember가 없을 때,
 		if(loginMember == null){
-			return RESPONSE_OK;
+			return RESPONSE_BAD_REQUEST;
 		}
 
 		// session 존재 o, loginMember도 있을 때,

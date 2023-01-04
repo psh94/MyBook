@@ -1,8 +1,7 @@
 package com.psh.mybook.controller;
 
 import com.psh.mybook.annotation.Login;
-import com.psh.mybook.model.Criteria;
-import com.psh.mybook.model.Page;
+import com.psh.mybook.annotation.LoginRequired;
 import com.psh.mybook.model.member.Member;
 import com.psh.mybook.model.member.MemberLoginParam;
 import com.psh.mybook.model.order.Order;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_CONFLICT;
 import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
@@ -38,6 +36,7 @@ public class OrderController {
 
     // 장바구니 or 상품 상세에서 주문하기를 클릭 했을때
     @GetMapping
+    @LoginRequired
     public ResponseEntity<Void> orderPageGET(@PathVariable String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
@@ -48,7 +47,8 @@ public class OrderController {
     }
 
     // order 페이지에서 주문하기를 눌렀을 때
-    @PostMapping("/enroll")
+    @PostMapping
+    @LoginRequired
     public ResponseEntity<Void> orderPagePOST(@Login MemberLoginParam memberLoginParam, Order order, HttpServletRequest request){
 
         orderService.enrollOrder(order);
@@ -71,6 +71,7 @@ public class OrderController {
 
     /* 주문 확인 */
     @GetMapping("/{orderId}")
+    @LoginRequired
     public ResponseEntity<Void> getOrder(@PathVariable String orderId, Model model){
 
         model.addAttribute("order",orderService.getOrder(orderId));
@@ -83,6 +84,7 @@ public class OrderController {
     /* 주문취소 */
     // 주문을 삭제하는 것이 아닌 주문 상태를 '주문취소'로 만든다.
     @PostMapping("/{orderId}")
+    @LoginRequired
     public ResponseEntity<Void> orderCancle(OrderCancel orderCancel) {
 
         orderService.orderCancle(orderCancel);
@@ -90,24 +92,5 @@ public class OrderController {
         return RESPONSE_OK;
 
     }
-
-
-
-    /* 주문 리스트 확인(관리자) */
-    @GetMapping("/list")
-    public ResponseEntity<Void> orderList(Criteria cri, Model model) {
-
-        List<Order> list = orderService.getOrderList(cri);
-
-        if(!list.isEmpty()) {
-            model.addAttribute("list", list);
-            model.addAttribute("pageMaker", new Page(cri, orderService.getOrderTotal(cri)));
-        } else {
-            model.addAttribute("listCheck", "empty");
-        }
-
-        return RESPONSE_OK;
-    }
-
 
 }

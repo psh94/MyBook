@@ -1,5 +1,6 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.annotation.LoginRequired;
 import com.psh.mybook.model.Criteria;
 import com.psh.mybook.model.Page;
 import com.psh.mybook.model.book.AttachImage;
@@ -37,6 +38,7 @@ public class BookController {
 
     // 책 등록
     @PostMapping
+    @LoginRequired
     public ResponseEntity<Void> enrollBook(@Valid BookEnrollParam bookEnrollParam, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -55,7 +57,7 @@ public class BookController {
     }
 
     // 책 조회
-    @GetMapping("/detail/{bookId}")
+    @GetMapping("/{bookId}")
     public Book bookDetail(@PathVariable int bookId, Model model){
         model.addAttribute("bookInfo", bookService.getBookInfo(bookId));
         return bookService.getBookInfo(bookId);
@@ -65,6 +67,7 @@ public class BookController {
 
     // 책 업데이트
     @PutMapping("/{bookId}")
+    @LoginRequired
     public ResponseEntity<Void> bookUpdate(@PathVariable String bookId, @Valid BookUpdateParam bookUpdateParam){
         boolean existedBook = bookService.isExistBookId(bookUpdateParam.getBookId());
 
@@ -86,6 +89,7 @@ public class BookController {
     // 그렇기 때문에 bookId를 갖고 있는 book의 데이터를 지우기에 앞서 image 데이터를 먼저 지워야 한다.
     // 책 삭제
     @PostMapping("/{bookId}")
+    @LoginRequired
     public ResponseEntity<Void> bookDelete(@PathVariable String bookId, @Valid Book book){
 
         //이미지 정보를 먼저 지워준다.

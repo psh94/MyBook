@@ -1,5 +1,6 @@
 package com.psh.mybook.controller;
 
+import com.psh.mybook.annotation.LoginRequired;
 import com.psh.mybook.mapper.ImageMapper;
 import com.psh.mybook.model.book.AttachImage;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,7 @@ public class ImageController {
     /* 첨부 파일 업로드 */
     // MultipartFile : view에서 전송한 multipart 타입의 파일을 다룰 수 있도록 해줌(스프링에서 제공)
     @PostMapping("/upload")
+    @LoginRequired
     public ResponseEntity<List<AttachImage>> uploadImage(MultipartFile[] uploadFile) {
 
         /*--------------- 이미지 파일 체크 --------------------------------------------------*/

@@ -23,26 +23,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
-                .order(1)
-                .addPathPatterns("/**")
-                .excludePathPatterns(
-                        "/members/join/**",
-                        "/members/login",
-                        "/members/logout",
-                        "/books/detail/{bookId}",
-                        "/books/search",
-                        "/images/display",
-                        "/images/getAttachList",
-                        "/home"
-                );
+                .order(1);
 
         registry.addInterceptor(new AdminInterceptor())
                 .order(2)
                 .addPathPatterns(
                         "/books",
                         "/books/{bookId}",
-                        "/images/upload",
-                        "/orders/list"
+                        "/images/upload"
                 );
     }
 

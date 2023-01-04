@@ -43,8 +43,8 @@ public class MemberController {
 
 	}
 
-	@PostMapping("/{memberId}/exists")
-	public ResponseEntity<Void> memberChkId(@PathVariable String memberId){
+	@PostMapping("/join/exists")
+	public ResponseEntity<Void> memberChkId(String memberId){
 
 		if(!memberService.isExistMemberId(memberId)){
 			return RESPONSE_OK;

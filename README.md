@@ -14,48 +14,13 @@
 ## Use Case
 https://github.com/psh94/MyBook/wiki/Use-Case
 
-## 기능
-
-### member
-- 회원가입
-- 회원정보 수정
-- 회원정보 조회
-- 회원 탈퇴
-- 로그인
-- 로그아웃
-
-### book
-- 상품 등록
-- 상품 정보 수정
-- 상품 정보 조회
-- 상품 삭제
-- 상품 검색
-
-### cart
-- 장바구니 생성
-- 장바구니 조회
-- 상품수량 수정
-- 장바구니 삭제
-
-### order
-- 주문 생성
-- 주문 확인
-- 주문 취소
-- 주문 전체 리스트 확인
-
-### reply
-- 댓글 생성 
-- 댓글 조회
-- 댓글 수정
-- 댓글 삭제
-
 
 ## Application UI
 
 https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 
 ## ERD
-![erd](https://user-images.githubusercontent.com/84213252/210246182-77bdb0e8-6975-40ea-8e19-47d42755a806.PNG)
+![url 정리](https://user-images.githubusercontent.com/84213252/210503783-38952911-11d1-403b-8992-0ebde2456c84.PNG)
 
 
 

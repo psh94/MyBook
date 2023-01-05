@@ -27,8 +27,8 @@ https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 ![erd](https://user-images.githubusercontent.com/84213252/210503831-a9e561a7-5012-487a-977f-5a37a993880e.PNG)
 
 
-## 📖 URL
-![url 정리](https://user-images.githubusercontent.com/84213252/210552133-325ba47c-4595-4215-a4ac-1d9df21d1cad.PNG)
+## 📖 URI
+![uri 정리](https://user-images.githubusercontent.com/84213252/210716702-5f596060-4b43-42a7-ad07-084ac9372a97.PNG)
 
 ## 📖 참고 강의 및 자료
 #### <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B8%B0%EB%B3%B8%ED%8E%B8" >스프링 핵심원리 [기본편] : 김영한 </a>

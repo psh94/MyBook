@@ -18,7 +18,7 @@ import static com.psh.mybook.utill.HttpResponses.RESPONSE_OK;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/reply")
+@RequestMapping("/replies")
 public class ReplyController {
 
     private final ReplyService replyService;

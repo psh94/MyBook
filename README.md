@@ -36,5 +36,7 @@ https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 #### <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-2">스프링 MVC 2편 - 백엔드 웹 개발 활용 기술</a>
 #### <a href="https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">모든 개발자를 위한 HTTP 웹 기본 지식</a>
 #### <a href="https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html">[Network] REST란? REST API란? RESTful이란? : gmlwjd9405.github.io</a>
-#### <a href="https://kimvampa.tistory.com/category/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC/%EC%87%BC%ED%95%91%EB%AA%B0%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">스프링 프레임워크 - 쇼핑몰 프로젝트 : kimvampa.tistory.com</a>
 #### <a href="https://www.youtube.com/watch?v=NODVCBmyaXs">[10분 테코톡] 🐯 심바의 RESTful</a>
+#### <a href="https://www.youtube.com/watch?v=RP_f5dMoHFc">그런 REST API로 괜찮은가 - 이용준</a>
+#### <a href="https://kimvampa.tistory.com/category/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC/%EC%87%BC%ED%95%91%EB%AA%B0%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">스프링 프레임워크 - 쇼핑몰 프로젝트 : kimvampa.tistory.com</a>
+

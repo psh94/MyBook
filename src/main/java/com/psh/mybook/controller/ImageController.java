@@ -38,13 +38,13 @@ public class ImageController {
 
     private final ImageMapper imageMapper;
 
-    /* 첨부 파일 업로드 */
+    // --------------------첨부파일 업로드------------------------------------------------------------------------
     // MultipartFile : view에서 전송한 multipart 타입의 파일을 다룰 수 있도록 해줌(스프링에서 제공)
     @PostMapping("/upload")
     @LoginRequired
     public ResponseEntity<List<AttachImage>> uploadImage(MultipartFile[] uploadFile) {
 
-        /*--------------- 이미지 파일 체크 --------------------------------------------------*/
+        //--------------- 이미지 파일 체크 ---------------------------
         for (MultipartFile multipartFile : uploadFile) {
 
             // 뷰로부터 전달받은 파일 이름을 그대로 사용
@@ -72,8 +72,8 @@ public class ImageController {
         }
 
 
-        /*---------------- 폴더 생성 ---------------------------------------------*/
-
+        //---------------- 폴더 생성 ---------------------------
+        
         // 해당 폴더에 이미지가 저장된다.
 
         String uploadFolder = "C:\\upload";
@@ -102,7 +102,7 @@ public class ImageController {
         }
 
 
-        /*---------------- 이미지 객체 생성 ---------------------------------------------*/
+        //---------------- 이미지 객체 생성 ----------------------------------------
         /* 이미저 정보 담는 객체 */
         List<AttachImage> list = new ArrayList();
 
@@ -127,7 +127,7 @@ public class ImageController {
             File saveFile = new File(uploadPath, uploadFileName);
 
 
-            /*---------------- 이미지 파일 저장, 썸네일 생성 ---------------------------------------------*/
+            //---------------- 이미지 파일 저장, 썸네일 생성 --------------------------------
             /* 파일 저장 */
             try {
                 // view에서 전달받은 파일을 지정한 폴더에 저장
@@ -166,7 +166,7 @@ public class ImageController {
 
 
 
-    // 이미지 출력
+    // ---------------------------------------- 이미지 출력 ----------------------------------------
     // 이미지 파일은 바이너리 파일 범주에 들어가는데 바이너리 파일을 주고 받을 때에는 바이트 단위로 데이터를 주고 받는다. (자바의 최소 단위가 바이트)
     @GetMapping("/display")
     public ResponseEntity<byte[]> getImage(String fileName){
@@ -191,7 +191,7 @@ public class ImageController {
 
     }
 
-    /* 이미지 정보 반환 */
+    // ---------------------------------------- 이미지 정보 변환 ----------------------------------------
     @GetMapping("/getAttachList")
     public ResponseEntity<List<AttachImage>> getAttachList(int bookId){
 

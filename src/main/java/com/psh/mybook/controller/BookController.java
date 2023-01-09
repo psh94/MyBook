@@ -108,11 +108,13 @@ public class BookController {
                 pathList.add(path);
 
             });
-
+            
+            // 이미지 파일 제거
+            // Path 객체를 File 객체로 변환 후 삭제
             pathList.forEach(path ->{
                 path.toFile().delete();
             });
-        } // 이미지 제거
+        } 
 
         
         // ------------ 상품 제거-----------------
@@ -126,7 +128,7 @@ public class BookController {
     }
 
 
-    // 책 검색
+    // ---------------책 검색------------------------
     @GetMapping("/search")
     public ResponseEntity<Void> searchBook(Criteria cri, Model model){
 

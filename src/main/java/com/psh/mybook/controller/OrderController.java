@@ -34,10 +34,10 @@ public class OrderController {
     private final LoginService loginService;
 
 
-    // 장바구니 or 상품 상세에서 주문하기를 클릭 했을때
+    // ----------------------- 주문하기 페이지 ---------------------------
     @GetMapping
     @LoginRequired
-    public ResponseEntity<Void> orderPageGET(@PathVariable String memberId, OrderPage orderPage, Model model) {
+    public ResponseEntity<Void> orderPageGET(String memberId, OrderPage orderPage, Model model) {
 
         model.addAttribute("orderList", orderService.getBooksInfo(orderPage.getOrders()));
         model.addAttribute("memberInfo", memberService.getMemberInfo(memberId));
@@ -46,7 +46,7 @@ public class OrderController {
 
     }
 
-    // order 페이지에서 주문하기를 눌렀을 때
+    // -------------------------- 주문하기 -------------------------------------------
     @PostMapping
     @LoginRequired
     public ResponseEntity<Void> orderPagePOST(@Login MemberLoginParam memberLoginParam, Order order, HttpServletRequest request){
@@ -56,7 +56,7 @@ public class OrderController {
         HttpSession session = request.getSession();
 
         try {
-            System.out.println(memberLoginParam);
+            
             Member memberLogin = loginService.memberLogin(memberLoginParam);
             session.setAttribute(SessionConst.LOGIN_MEMBER, memberLogin);
 
@@ -69,7 +69,7 @@ public class OrderController {
         return RESPONSE_OK;
     }
 
-    /* 주문 확인 */
+    // -------------------------- 주문 확인 -------------------------------------------
     @GetMapping("/{orderId}")
     @LoginRequired
     public ResponseEntity<Void> getOrder(@PathVariable String orderId, Model model){
@@ -81,7 +81,7 @@ public class OrderController {
 
     }
 
-    /* 주문취소 */
+    // -------------------------- 주문 취소 -------------------------------------------
     // 주문을 삭제하는 것이 아닌 주문 상태를 '주문취소'로 만든다.
     @PostMapping("/{orderId}")
     @LoginRequired

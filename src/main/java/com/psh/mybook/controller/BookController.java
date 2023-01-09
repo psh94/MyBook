@@ -36,7 +36,7 @@ public class BookController {
     private final ImageService imageService;
 
 
-    // 책 등록
+    // ------------책 등록--------------
     @PostMapping
     @LoginRequired
     public ResponseEntity<Void> enrollBook(@Valid BookEnrollParam bookEnrollParam, BindingResult bindingResult){
@@ -45,18 +45,14 @@ public class BookController {
             return RESPONSE_BAD_REQUEST;
 
         }
+        
+        bookService.enrollBook(bookEnrollParam);
+        return RESPONSE_OK;
 
-        boolean existedBook = bookService.isExistBookId(bookEnrollParam.getBookId());
 
-        if(existedBook) {
-            return RESPONSE_CONFLICT;
-        } else {
-            bookService.enrollBook(bookEnrollParam);
-            return RESPONSE_OK;
-        }
     }
 
-    // 책 조회
+    // ------------책 조회------------------
     @GetMapping("/{bookId}")
     public Book bookDetail(@PathVariable int bookId, Model model){
         model.addAttribute("bookInfo", bookService.getBookInfo(bookId));
@@ -65,7 +61,7 @@ public class BookController {
 
 
 
-    // 책 업데이트
+    // ---------------책 업데이트---------------------
     @PutMapping("/{bookId}")
     @LoginRequired
     public ResponseEntity<Void> bookUpdate(@PathVariable String bookId, @Valid BookUpdateParam bookUpdateParam){
@@ -85,14 +81,16 @@ public class BookController {
     }
 
 
+
+    // -----------------------책 삭제------------------------------------------------------------------
     // image 테이블은 book 테이블의 bookId를 외래키로 받기 때문에 book 테이블의 데이터가 사라지면 에러가 발생한다.
     // 그렇기 때문에 bookId를 갖고 있는 book의 데이터를 지우기에 앞서 image 데이터를 먼저 지워야 한다.
-    // 책 삭제
+    
     @PostMapping("/{bookId}")
     @LoginRequired
     public ResponseEntity<Void> bookDelete(@PathVariable String bookId, @Valid Book book){
 
-        //이미지 정보를 먼저 지워준다.
+        // ------- (다수의) 이미지 정보를 먼저 지워준다.---------------------
         List<AttachImage> fileList = imageService.getAttachInfo(book.getBookId());
 
         if(fileList != null) {
@@ -105,7 +103,7 @@ public class BookController {
                 Path path = Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName());
                 pathList.add(path);
 
-                // 섬네일 이미지
+                // 썸네일 이미지
                 path = Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid()+"_" + vo.getFileName());
                 pathList.add(path);
 
@@ -114,11 +112,10 @@ public class BookController {
             pathList.forEach(path ->{
                 path.toFile().delete();
             });
-        } else {
+        } // 이미지 제거
 
-        }
-
-        // 상품을 제거한다.
+        
+        // ------------ 상품 제거-----------------
         if(book.getBookId() != 0){
             bookService.bookDelete(book);
             return RESPONSE_OK;
@@ -142,7 +139,7 @@ public class BookController {
         }else {
 
             model.addAttribute("listcheck", "empty");
-            return RESPONSE_BAD_REQUEST;
+            
         }
 
         model.addAttribute("pageMaker", new Page(cri, bookService.getBookTotal(cri)));

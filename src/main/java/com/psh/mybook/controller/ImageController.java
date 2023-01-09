@@ -191,7 +191,7 @@ public class ImageController {
 
     }
 
-    // ---------------------------------------- 이미지 정보 변환 ----------------------------------------
+    // ---------------------------------------- 이미지 정보 반환 ----------------------------------------
     @GetMapping("/getAttachList")
     public ResponseEntity<List<AttachImage>> getAttachList(int bookId){
 

@@ -17,6 +17,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+		// 인터셉터를 @LoginRequired로 적용
 		if(!(handler instanceof HandlerMethod)){
 			return true;
 		}
@@ -27,6 +28,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
+		// 인터셉터 적용
+		// redirectURL : 특정한 작업 이후 원하는 페이지로 이동하거나, 해당 작업 후 후속 작업이 필요할때 사용
 		System.out.println("LoginInterceptor preHandle 작동");
 
 		String requestURI = request.getRequestURI();

@@ -22,6 +22,7 @@ public class CartController {
 
     private final CartService cartService;
 
+    // ---------------- 장바구니 생성 --------------------------------
     @PostMapping
     @LoginRequired
     public int addCart(Cart cart, HttpServletRequest request) {
@@ -35,7 +36,10 @@ public class CartController {
         1 : 등록 성공
         2 : 이미 데이터 존재
         3 : 비 로그인 상태
+        
+        0,1,2는 서비스에서 처리, 3은 컨트롤러에서 처리
          */
+        
         if(member == null) {
             return 3;
         }
@@ -44,14 +48,17 @@ public class CartController {
         return cartService.addCart(cart);
     }
 
-
+    //--------------- 장바구니 조회 ---------------------------------
     @GetMapping("/{cartId}")
     @LoginRequired
-    public ResponseEntity<Void> cartPage(@PathVariable String cartId, Model model) {
+    public ResponseEntity<Void> cartPage(@PathVariable String cartId, @Login Member member, Model model) {
+        
+        List<Cart> cart = cartService.getCart(member.getMemberId());
+        model.addAttribute("cart", cart);
         return RESPONSE_OK;
     }
 
-
+    //--------------- 장바구니 책 수량 수정 ---------------------------------
     @PutMapping("/{cartId}")
     @LoginRequired
     public ResponseEntity<Void> updateCart(@PathVariable String cartId, Cart cart) {
@@ -59,9 +66,9 @@ public class CartController {
         cartService.modifyCount(cart);
 
         return RESPONSE_OK;
-
     }
-
+    
+    //--------------- 장바구니 삭제 ---------------------------------
     @DeleteMapping("/{cartId}")
     @LoginRequired
     public ResponseEntity<Void> deleteCart(@PathVariable String cartId, Cart cart) {

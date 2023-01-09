@@ -23,7 +23,7 @@ public class ReplyController {
 
     private final ReplyService replyService;
 
-    /* 댓글 등록 */
+    // ---------------------- 댓글 등록 -----------------------------
     @PostMapping("/enroll")
     @LoginRequired
     public ResponseEntity<Void> enrollReply(ReplyEnrollParam param) {
@@ -38,17 +38,18 @@ public class ReplyController {
             return RESPONSE_BAD_REQUEST;
 
         }
-
     }
 
-    /* 댓글 조회, 페이징 */
+    // ---------------------- 댓글 조회 -----------------------------
     @GetMapping("/{replyId}")
-    public ResponseEntity<ReplyPage> replyList(@PathVariable int replyId, Criteria cri) {
-        replyService.replyList(cri);
+    public ResponseEntity<ReplyPage> replyList(@PathVariable int replyId, Criteria cri, Model model) {
+        ReplyPage replyPage = replyService.replyList(cri);
+        model.addAttribute("replyPage", replyPage);
         return RESPONSE_OK;
     }
 
-    /* 댓글 수정 */
+    // ---------------------- 댓글 수정 -----------------------------
+
     @PutMapping("/{replyId}")
     @LoginRequired
     public ResponseEntity<Void> replyModifyPOST(@PathVariable int replyId, ReplyUpdateParam param) {
@@ -56,7 +57,7 @@ public class ReplyController {
         return RESPONSE_OK;
     }
 
-    /* 댓글 삭제 */
+    // ---------------------- 댓글 삭제 -----------------------------
     @DeleteMapping("/{replyId}")
     @LoginRequired
     public ResponseEntity<Void> replyDelete(@PathVariable int replyId, Reply reply) {

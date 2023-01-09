@@ -143,12 +143,6 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.getOrder(orderId);
     }
 
-    /* 주문 상품 리스트 */
-    @Override
-    public List<Order> getOrderList(Criteria cri) {
-        return orderMapper.getOrderList(cri);
-    }
-
     /* 주문 총 갯수 */
     @Override
     public int getOrderTotal(Criteria cri) {

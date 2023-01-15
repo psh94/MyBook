@@ -33,8 +33,8 @@ https://ovenapp.io/view/TVR47uzrH0GzjlsyZEqvznMmmJEc0Irr#Q8nwO
 ## 📖 참고 강의 및 자료
 #### <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B8%B0%EB%B3%B8%ED%8E%B8" >스프링 핵심원리 [기본편] : 김영한 </a>
 #### <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1"> 스프링 MVC 1편 - 백엔드 웹 개발 핵심 기술 : 김영한 </a>
-#### <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-2">스프링 MVC 2편 - 백엔드 웹 개발 활용 기술</a>
-#### <a href="https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">모든 개발자를 위한 HTTP 웹 기본 지식</a>
+#### <a href="https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-2">스프링 MVC 2편 - 백엔드 웹 개발 활용 기술 : 김영한</a>
+#### <a href="https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">모든 개발자를 위한 HTTP 웹 기본 지식 : 김영한</a>
 #### <a href="https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html">[Network] REST란? REST API란? RESTful이란? : gmlwjd9405.github.io</a>
 #### <a href="https://www.youtube.com/watch?v=NODVCBmyaXs">[10분 테코톡] 🐯 심바의 RESTful</a>
 #### <a href="https://www.youtube.com/watch?v=RP_f5dMoHFc">그런 REST API로 괜찮은가 - 이용준</a>
